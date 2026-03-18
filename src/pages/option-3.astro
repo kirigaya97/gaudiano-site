@@ -1,0 +1,374 @@
+---
+// Option 3 — Strategic / Modern Authority
+// Midnight (#0B0F1A) + cream (#F5F2EB) + gold-tan (#D2B48C)
+// Space Grotesk + Open Sans, bold geometric blocks
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Oasis de Claridad | Romina Gaudiano"
+  fonts="Space+Grotesk:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,300;0,400;1,300"
+>
+  <style is:global>
+    :root { --midnight: #0B0F1A; --cream: #F5F2EB; --gold: #D2B48C; --ink: #1A1A1A; }
+    body { font-family: 'Open Sans', sans-serif; background: var(--cream); color: var(--ink); }
+    .grotesk, h1, h2, h3, h4, nav { font-family: 'Space Grotesk', sans-serif; }
+
+    /* Scrollbar — razor: 2px, geometric, gold → cream on hover */
+    ::-webkit-scrollbar              { width: 2px; }
+    ::-webkit-scrollbar-track        { background: rgba(210,180,140,0.06); }
+    ::-webkit-scrollbar-thumb        {
+      background: #D2B48C;
+      border-radius: 0;
+    }
+    ::-webkit-scrollbar-thumb:hover  { background: #F5F2EB; }
+    * { scrollbar-width: thin; scrollbar-color: #D2B48C transparent; }
+    ::selection { background: #D2B48C; color: #0B0F1A; }
+
+    @keyframes tag-pop {
+      from { opacity: 0; scale: 0.85; }
+      to   { opacity: 1; scale: 1; }
+    }
+    .tag-item {
+      opacity: 0;
+      animation: tag-pop linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 40%;
+    }
+
+    .offer-row {
+      transition: background 0.4s, padding-left 0.4s;
+    }
+    .offer-row:hover { padding-left: 1.5rem; background: rgba(210,180,140,0.06); }
+
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      line-height: 1;
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: #D2B48C;
+      transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav-link:hover::after { width: 100%; }
+  </style>
+
+  <!-- ── Nav ───────────────────────────────────────────── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-16 py-4 md:py-5"
+       style="background: var(--midnight);">
+    <span class="text-xs tracking-[0.3em] uppercase font-medium" style="color: rgba(245,242,235,0.6);">
+      Romina Gaudiano
+    </span>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#mentoria" class="nav-link text-xs tracking-[0.2em] uppercase font-medium" style="color: rgba(245,242,235,0.4);">Mentoría</a>
+      <a href="#sobre-mi" class="nav-link text-xs tracking-[0.2em] uppercase font-medium" style="color: rgba(245,242,235,0.4);">Sobre Mí</a>
+      <a href="#protocolo" class="nav-link text-xs tracking-[0.2em] uppercase font-medium" style="color: rgba(245,242,235,0.4);">Protocolo</a>
+    </div>
+    <a href="#contacto"
+      class="text-xs tracking-[0.2em] uppercase font-medium px-6 py-3 transition-colors duration-300"
+      style="background: var(--gold); color: var(--midnight);"
+      onmouseover="this.style.background='var(--cream)'"
+      onmouseout="this.style.background='var(--gold)'">
+      Aplicá Acá
+    </a>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────── -->
+  <section class="relative min-h-screen grid md:grid-cols-2 items-stretch pt-16 overflow-hidden">
+
+    <div class="absolute inset-0 z-0">
+      <img src="/abstract-background-hero.png" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(11,15,26,0.85) 50%, rgba(11,15,26,0.3));"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col justify-center px-6 md:px-16 py-20 md:py-32">
+      <div class="hero-item flex items-center gap-4 mb-10" style="animation-delay: 0.2s;">
+        <div class="w-6 h-px" style="background: var(--gold);"></div>
+        <p class="text-xs tracking-[0.4em] uppercase font-medium grotesk" style="color: rgba(210,180,140,0.7);">
+          Mentoría 1:1 – CryptoMind Pro Elite
+        </p>
+      </div>
+
+      <h1 class="hero-item text-5xl md:text-[4.5rem] font-bold leading-[1.05] mb-8"
+          style="color: var(--cream); font-weight:700; animation-delay: 0.45s;">
+        El poder de una<br />
+        <span style="color: var(--gold);">reprogramación<br />mental.</span>
+      </h1>
+
+      <p class="hero-item text-base leading-relaxed max-w-md mb-2"
+         style="color: rgba(245,242,235,0.65); font-weight:400; animation-delay: 0.7s;">
+        Reprogramación Mental y Cambio de Hábitos para Traders e Inversores.
+      </p>
+      <p class="hero-item text-sm leading-relaxed max-w-md mb-12"
+         style="color: rgba(245,242,235,0.4); font-weight:300; animation-delay: 0.78s;">
+        Diseñada para quienes buscan optimizar su rendimiento interno, sostener claridad emocional y tomar decisiones conscientes bajo presión.
+      </p>
+
+      <div class="hero-item flex gap-4 flex-wrap grotesk" style="animation-delay: 0.9s;">
+        <a href="#contacto"
+          class="text-xs tracking-[0.2em] uppercase font-medium px-8 py-4 transition-colors duration-300"
+          style="background: var(--gold); color: var(--midnight);"
+          onmouseover="this.style.background='var(--cream)'"
+          onmouseout="this.style.background='var(--gold)'">
+          Aplicar Acá
+        </a>
+        <a href="#mentoria"
+          class="text-xs tracking-[0.2em] uppercase font-medium px-8 py-4 transition-colors duration-300"
+          style="border: 1px solid rgba(245,242,235,0.2); color: rgba(245,242,235,0.6);"
+          onmouseover="this.style.borderColor='rgba(210,180,140,0.6)'; this.style.color='var(--gold)'"
+          onmouseout="this.style.borderColor='rgba(245,242,235,0.2)'; this.style.color='rgba(245,242,235,0.6)'">
+          Saber más
+        </a>
+      </div>
+    </div>
+
+    <div class="relative z-10 hidden md:flex items-end justify-center hero-item-right" style="animation-delay: 0.1s;">
+      <img src="/portrait-opt-3.png" alt="Romina Gaudiano"
+        class="w-full h-full object-cover object-top" style="max-height: 100vh;" />
+    </div>
+
+  </section>
+
+  <!-- ── Stats strip ────────────────────────────────────── -->
+  <div class="py-12 md:py-16 px-6 md:px-16" style="background: var(--gold);">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+      <div class="py-4 sm:py-0">
+        <p class="stat-num" data-count="4500" data-suffix="+" style="color: var(--midnight);">4500+</p>
+        <p class="text-xs tracking-[0.3em] uppercase mt-3 font-medium grotesk" style="color: rgba(11,15,26,0.6);">Procesos de transformación</p>
+      </div>
+      <div class="py-4 sm:py-0 border-t border-b sm:border-t-0 sm:border-b-0 sm:border-l sm:border-r" style="border-color: rgba(11,15,26,0.15);">
+        <p class="stat-num" data-count="12" style="color: var(--midnight);">12</p>
+        <p class="text-xs tracking-[0.3em] uppercase mt-3 font-medium grotesk" style="color: rgba(11,15,26,0.6);">Sesiones personalizadas</p>
+      </div>
+      <div class="py-4 sm:py-0">
+        <p class="stat-num" data-count="3" style="color: var(--midnight);">3</p>
+        <p class="text-xs tracking-[0.3em] uppercase mt-3 font-medium grotesk" style="color: rgba(11,15,26,0.6);">Meses de proceso</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ¿Por qué? ──────────────────────────────────────── -->
+  <section id="mentoria" class="py-16 md:py-32 px-6 md:px-16" style="background: var(--midnight); color: var(--cream);">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-[1fr_2fr] gap-16 items-start">
+
+      <div class="reveal">
+        <p class="text-xs tracking-[0.4em] uppercase font-medium grotesk mb-6" style="color: var(--gold);">La pregunta clave</p>
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight" style="font-weight:700;">
+          ¿Por qué<br />reprogramación<br />mental?
+        </h2>
+        <div class="mt-10 w-12 h-1" style="background: var(--gold);"></div>
+      </div>
+
+      <div class="reveal">
+        <p class="text-lg leading-loose mb-6" style="color: rgba(245,242,235,0.65); font-weight:300;">
+          Porque los hábitos que determinan tus decisiones económicas y financieras no son conscientes, no se corrigen con fuerza de voluntad, y se sostienen en patrones neuronales automáticos.
+        </p>
+        <p class="text-lg leading-loose mb-6" style="color: rgba(245,242,235,0.65); font-weight:300;">
+          Las neurociencias demuestran que la toma de decisiones financieras se activa desde el subconsciente, <em>incluso en personas altamente racionales.</em>
+        </p>
+        <p class="text-base leading-loose mb-10" style="color: rgba(245,242,235,0.4); font-weight:300;">
+          Esta mentoría no es para aprender a operar. Trabaja donde realmente se define el resultado: tu respuesta interna frente al riesgo, la ganancia y la pérdida.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          {["Neurociencias", "Subconsciente", "Regulación Emocional", "Hábitos", "Alto Rendimiento"].map((tag, i) => (
+            <span class="tag-item text-xs tracking-[0.2em] uppercase px-4 py-2 font-medium grotesk"
+                  style={`border: 1px solid rgba(210,180,140,0.2); color: rgba(210,180,140,0.5); animation-delay: ${i * 0.08}s;`}>{tag}</span>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Protocolo ──────────────────────────────────────── -->
+  <section id="protocolo" class="py-16 md:py-32 px-6 md:px-16" style="background: var(--cream);">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="mb-20 reveal">
+        <p class="text-xs tracking-[0.4em] uppercase font-medium grotesk mb-4" style="color: var(--gold);">Protocolo</p>
+        <h2 class="text-4xl md:text-6xl font-bold leading-tight" style="color: var(--midnight); font-weight:700;">
+          El trabajo.
+        </h2>
+      </div>
+
+      <div class="offer-row border-t py-8 md:py-12 grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center reveal"
+           style="border-color: rgba(11,15,26,0.1);">
+        <p class="text-4xl md:text-6xl font-bold grotesk" style="color: rgba(11,15,26,0.08); font-weight:700; line-height:1;">01</p>
+        <div>
+          <h3 class="text-xl md:text-3xl font-bold mb-3 md:mb-4" style="font-weight:700;">Reprogramación Mental Subconsciente</h3>
+          <p class="leading-relaxed text-sm md:text-base" style="color: rgba(26,26,26,0.55); font-weight:300;">
+            No analizamos el síntoma. Reprogramamos el patrón que lo genera y lo cambiamos de raíz.
+          </p>
+          <a href="#contacto"
+            class="mt-4 inline-block md:hidden text-xs tracking-[0.2em] uppercase font-medium px-5 py-3 grotesk transition-colors duration-300"
+            style="background: var(--midnight); color: var(--cream);">
+            Aplicar →
+          </a>
+        </div>
+        <a href="#contacto"
+          class="hidden md:block whitespace-nowrap text-xs tracking-[0.2em] uppercase font-medium px-6 py-4 grotesk transition-colors duration-300"
+          style="background: var(--midnight); color: var(--cream);"
+          onmouseover="this.style.background='var(--gold)'; this.style.color='var(--midnight)'"
+          onmouseout="this.style.background='var(--midnight)'; this.style.color='var(--cream)'">
+          Aplicar →
+        </a>
+      </div>
+
+      <div class="offer-row border-t py-8 md:py-12 grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center reveal"
+           style="border-color: rgba(11,15,26,0.1);">
+        <p class="text-4xl md:text-6xl font-bold grotesk" style="color: rgba(11,15,26,0.08); font-weight:700; line-height:1;">02</p>
+        <div>
+          <h3 class="text-xl md:text-3xl font-bold mb-3 md:mb-4" style="font-weight:700;">Neurociencias Aplicadas a la Regulación Emocional</h3>
+          <p class="leading-relaxed text-sm md:text-base" style="color: rgba(26,26,26,0.55); font-weight:300;">
+            Prácticas para dominar la biología del enfoque con el objetivo de lograr estabilidad emocional bajo presión.
+          </p>
+          <a href="#contacto"
+            class="mt-4 inline-block md:hidden text-xs tracking-[0.2em] uppercase font-medium px-5 py-3 grotesk transition-colors duration-300"
+            style="background: var(--gold); color: var(--midnight);">
+            Aplicar →
+          </a>
+        </div>
+        <a href="#contacto"
+          class="hidden md:block whitespace-nowrap text-xs tracking-[0.2em] uppercase font-medium px-6 py-4 grotesk transition-colors duration-300"
+          style="background: var(--gold); color: var(--midnight);"
+          onmouseover="this.style.background='var(--midnight)'; this.style.color='var(--cream)'"
+          onmouseout="this.style.background='var(--gold)'; this.style.color='var(--midnight)'">
+          Aplicar →
+        </a>
+      </div>
+
+      <div class="offer-row border-t py-8 md:py-12 grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center reveal"
+           style="border-color: rgba(11,15,26,0.1);">
+        <p class="text-4xl md:text-6xl font-bold grotesk" style="color: rgba(11,15,26,0.08); font-weight:700; line-height:1;">03</p>
+        <div>
+          <h3 class="text-xl md:text-3xl font-bold mb-3 md:mb-4" style="font-weight:700;">Cambio de Hábitos de Alto Rendimiento</h3>
+          <p class="leading-relaxed text-sm md:text-base" style="color: rgba(26,26,26,0.55); font-weight:300;">
+            Sincronizamos la arquitectura mental con la emocional para consolidar una disciplina de alto impacto.
+          </p>
+          <a href="#contacto"
+            class="mt-4 inline-block md:hidden text-xs tracking-[0.2em] uppercase font-medium px-5 py-3 grotesk transition-colors duration-300"
+            style="background: var(--midnight); color: var(--cream);">
+            Aplicar →
+          </a>
+        </div>
+        <a href="#contacto"
+          class="hidden md:block whitespace-nowrap text-xs tracking-[0.2em] uppercase font-medium px-6 py-4 grotesk transition-colors duration-300"
+          style="background: var(--midnight); color: var(--cream);"
+          onmouseover="this.style.background='var(--gold)'; this.style.color='var(--midnight)'"
+          onmouseout="this.style.background='var(--midnight)'; this.style.color='var(--cream)'">
+          Aplicar →
+        </a>
+      </div>
+
+      <div class="border-t" style="border-color: rgba(11,15,26,0.1);"></div>
+
+    </div>
+  </section>
+
+  <!-- ── Sobre Romina / velvet ──────────────────────────── -->
+  <section id="sobre-mi" class="relative py-32 px-8 md:px-16 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="/decorative-abstract.png" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0" style="background: rgba(11,15,26,0.75);"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+      <div class="reveal">
+        <p class="text-xs tracking-[0.4em] uppercase font-medium grotesk mb-8" style="color: var(--gold);">Sobre Mí</p>
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-8" style="color: var(--cream); font-weight:700;">
+          Romina <span style="color: var(--gold);">Gaudiano.</span>
+        </h2>
+        <p class="text-lg leading-loose mb-8" style="color: rgba(245,242,235,0.65); font-weight:300;">
+          Diplomada en Neurociencias, Neurocoach y especialista en reprogramación de la mente subconsciente, con más de 4500 procesos de transformación real.
+        </p>
+        <blockquote class="border-l border-[#D2B48C]/40 pl-6 italic"
+                    style="color: rgba(245,242,235,0.5); font-weight:300;">
+          "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él. El trabajo no se corta cuando termina la sesión; el cambio se sostiene en el día a día."
+        </blockquote>
+      </div>
+
+      <div class="reveal">
+        <p class="text-xs tracking-[0.4em] uppercase font-medium grotesk mb-8" style="color: var(--gold);">
+          Resultados que buscan quienes eligen esta mentoría
+        </p>
+        <div class="grid grid-cols-2 gap-3">
+          {["Mayor estabilidad emocional", "Decisiones más conscientes", "Hábitos mentales sólidos", "Menor reactividad", "Protección del capital", "Confianza interna sostenida"].map((r, i) => (
+            <div class="tag-item p-4" style={`border: 1px solid rgba(210,180,140,0.2); animation-delay: ${i * 0.07}s;`}>
+              <p class="text-sm grotesk" style="color: rgba(245,242,235,0.65); font-weight:400;">{r}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA Final ──────────────────────────────────────── -->
+  <section id="contacto" class="py-20 md:py-40 px-6 md:px-16 reveal" style="background: var(--midnight); color: var(--cream);">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+      <div>
+        <p class="text-xs tracking-[0.4em] uppercase font-medium grotesk mb-8" style="color: var(--gold);">
+          Mentoría 1:1 · Cupos limitados
+        </p>
+        <h2 class="text-5xl md:text-6xl font-bold leading-tight" style="font-weight:700;">
+          Mayor estabilidad.<br />
+          <span style="color: var(--gold);">Decisiones limpias.</span>
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <p class="text-base leading-relaxed" style="color: rgba(245,242,235,0.55); font-weight:300;">
+          Hábitos mentales sólidos para proteger tu capital. Contactá ahora para reservar tu lugar.
+        </p>
+        <a href="mailto:hola@rominagaudiano.com"
+          class="text-center text-sm tracking-[0.2em] uppercase font-medium px-8 py-5 grotesk transition-colors duration-300"
+          style="background: var(--gold); color: var(--midnight);"
+          onmouseover="this.style.background='var(--cream)'; this.style.color='var(--midnight)'"
+          onmouseout="this.style.background='var(--gold)'; this.style.color='var(--midnight)'">
+          Aplicá Acá
+        </a>
+        <p class="text-xs text-center" style="color: rgba(245,242,235,0.25); font-weight:300;">Respondemos en menos de 24 hs.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="px-4 md:px-16 py-8 flex justify-between items-center"
+          style="background: var(--midnight); border-top: 1px solid rgba(210,180,140,0.1);">
+    <span class="text-xs tracking-[0.3em] uppercase font-medium grotesk" style="color: rgba(245,242,235,0.25);">Romina Gaudiano</span>
+    <span class="text-xs" style="color: rgba(245,242,235,0.15);">© 2025</span>
+  </footer>
+
+  <script>
+    const counters = document.querySelectorAll('[data-count]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.count ?? '0');
+        const prefix = el.dataset.prefix ?? '';
+        const suffix = el.dataset.suffix ?? '';
+        const duration = 1600;
+        let startTime: number | null = null;
+        const tick = (timestamp: number) => {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = prefix + Math.floor(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(c => observer.observe(c));
+  </script>
+
+</BaseLayout>

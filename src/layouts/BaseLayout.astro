@@ -1,0 +1,61 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  fonts?: string;
+}
+
+const {
+  title = "Romina Gaudiano",
+  description = "Especialista en Reprogramación Mental Aplicada. Neurociencia, subconsciente y decisiones limpias.",
+  fonts = "Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400",
+} = Astro.props;
+
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href={`https://fonts.googleapis.com/css2?family=${fonts}&display=swap`}
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Custom cursor -->
+    <div id="g-cursor"></div>
+
+    <slot />
+
+    <script>
+      // ── Cursor ──────────────────────────────────────────
+      const cursor = document.getElementById('g-cursor');
+      if (cursor && window.matchMedia('(hover: hover)').matches) {
+        document.addEventListener('mousemove', e => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top  = e.clientY + 'px';
+        }, { passive: true });
+
+        document.querySelectorAll('a, button').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+      }
+
+      // ── Nav scroll border ───────────────────────────────
+      const nav = document.querySelector('nav');
+      if (nav) {
+        window.addEventListener('scroll', () => {
+          nav.classList.toggle('nav-scrolled', window.scrollY > 60);
+        }, { passive: true });
+      }
+    </script>
+  </body>
+</html>

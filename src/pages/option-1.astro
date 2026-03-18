@@ -1,0 +1,286 @@
+---
+// Option 1 — Editorial / Old Money
+// Dark (#1A1A1A), Playfair Display + Lora, magazine layout, sparse whitespace
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Oasis de Claridad | Romina Gaudiano"
+  fonts="Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400"
+>
+  <style is:global>
+    /* Scrollbar — editorial: ultra-thin, invisible track, faded gold thumb */
+    ::-webkit-scrollbar              { width: 3px; }
+    ::-webkit-scrollbar-track        { background: transparent; }
+    ::-webkit-scrollbar-thumb        {
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #D2B48C 20%,
+        #D2B48C 80%,
+        transparent 100%
+      );
+      border-radius: 0;
+    }
+    ::-webkit-scrollbar-thumb:hover  { background: #F5F2EB; }
+    * { scrollbar-width: thin; scrollbar-color: #D2B48C transparent; }
+    ::selection { background: #D2B48C; color: #1A1A1A; }
+
+    @keyframes rule-expand {
+      from { width: 0; opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .hero-rule { opacity: 0; animation: rule-expand 0.6s ease forwards; animation-delay: 1s; }
+
+    @keyframes sep-grow {
+      from { transform: scaleX(0); transform-origin: left; }
+      to   { transform: scaleX(1); transform-origin: left; }
+    }
+    .sep-line {
+      animation: sep-grow 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+
+    .offer-card {
+      transition: border-color 0.6s, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.6s;
+    }
+    .offer-card:hover {
+      border-color: rgba(210,180,140,0.5) !important;
+      transform: translateY(-7px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: #D2B48C;
+      transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #D2B48C; }
+  </style>
+
+  <div class="bg-[#1A1A1A] text-[#F5F2EB] min-h-screen" style="font-family: 'Lora', serif;">
+
+    <!-- ── Nav ───────────────────────────────────────────── -->
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-10 py-5 md:py-6 bg-[#1A1A1A]/90 backdrop-blur-sm transition-shadow duration-500">
+      <span class="text-xs tracking-[0.3em] uppercase text-[#D2B48C]">Romina Gaudiano</span>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#mentoria" class="nav-link text-xs tracking-[0.25em] uppercase text-[#F5F2EB]/50 transition-colors duration-300">Mentoría</a>
+        <a href="#sobre-mi" class="nav-link text-xs tracking-[0.25em] uppercase text-[#F5F2EB]/50 transition-colors duration-300">Sobre Mí</a>
+        <a href="#protocolo" class="nav-link text-xs tracking-[0.25em] uppercase text-[#F5F2EB]/50 transition-colors duration-300">Protocolo</a>
+      </div>
+      <a href="#contacto" class="nav-link text-xs tracking-[0.25em] uppercase text-[#F5F2EB]/70 transition-colors duration-300">
+        Aplicá Acá
+      </a>
+    </nav>
+
+    <!-- ── Hero ──────────────────────────────────────────── -->
+    <section class="min-h-screen grid md:grid-cols-2 pt-16 md:pt-20">
+
+      <div class="relative hidden md:block img-zoom hero-item-left" style="animation-delay: 0.1s;">
+        <img src="/gaudiano1.jpg" alt="Romina Gaudiano"
+          class="w-full h-full object-cover object-top"
+          style="filter: grayscale(30%) contrast(1.05);" />
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#1A1A1A]"></div>
+      </div>
+
+      <div class="flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-16 pt-10 md:pt-32">
+        <div class="max-w-4xl">
+          <p class="hero-item text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-10" style="animation-delay: 0.35s;">
+            Mentoría 1:1 – CryptoMind Pro Elite
+          </p>
+          <h1 class="hero-item text-4xl md:text-6xl lg:text-8xl leading-[1.05] mb-8 md:mb-12"
+              style="font-family: 'Playfair Display', serif; animation-delay: 0.6s;">
+            El poder de una<br />
+            <em class="text-[#D2B48C]">reprogramación<br />mental.</em>
+          </h1>
+          <div class="hero-rule w-16 h-px bg-[#F5F2EB]/20 mb-12"></div>
+          <div class="hero-item text-lg leading-relaxed text-[#F5F2EB]/70 max-w-md mb-4" style="animation-delay: 1.05s;">
+            Reprogramación Mental y Cambio de Hábitos para Traders e Inversores.
+          </div>
+          <p class="hero-item text-base leading-relaxed text-[#F5F2EB]/50 max-w-md mb-16" style="animation-delay: 1.1s;">
+            Diseñada para quienes buscan optimizar su rendimiento interno, sostener claridad emocional y tomar decisiones conscientes bajo presión.
+          </p>
+          <a href="#contacto"
+            class="hero-item inline-block text-xs tracking-[0.3em] uppercase border border-[#F5F2EB]/20 px-10 py-4 hover:bg-[#F5F2EB] hover:text-[#1A1A1A] transition-all duration-500"
+            style="animation-delay: 1.25s;">
+            Aplicar Acá
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep-line border-t border-[#F5F2EB]/10 mx-4 md:mx-20"></div>
+
+    <!-- ── ¿Por qué? ──────────────────────────────────────── -->
+    <section id="mentoria" class="py-16 md:py-32 px-4 md:px-20 reveal">
+      <div class="max-w-5xl grid md:grid-cols-[1fr_2fr] gap-20 items-start">
+        <div>
+          <p class="text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-4">La pregunta clave</p>
+          <div class="w-8 h-px bg-[#D2B48C]"></div>
+        </div>
+        <div>
+          <h2 class="text-4xl md:text-5xl leading-tight mb-10"
+              style="font-family: 'Playfair Display', serif;">
+            ¿Por qué una mentoría de<br />
+            <em style="font-family: 'Playfair Display', serif; color: #D2B48C;">reprogramación mental?</em>
+          </h2>
+          <p class="text-[#F5F2EB]/70 leading-loose text-lg mb-6">
+            Porque los hábitos que determinan tus decisiones económicas y financieras no son conscientes, no se corrigen con fuerza de voluntad, y se sostienen en patrones neuronales automáticos.
+          </p>
+          <p class="text-[#F5F2EB]/70 leading-loose text-lg mb-6">
+            Las neurociencias demuestran que la toma de decisiones financieras se activa desde el subconsciente, <em>incluso en personas altamente racionales.</em>
+          </p>
+          <p class="text-[#F5F2EB]/60 leading-loose text-base">
+            Esta mentoría no es para aprender a operar. Trabaja donde realmente se define el resultado: tu respuesta interna frente al riesgo, la ganancia y la pérdida.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep-line border-t border-[#F5F2EB]/10 mx-4 md:mx-20"></div>
+
+    <!-- ── Protocolo / 3 pilares ──────────────────────────── -->
+    <section id="protocolo" class="py-16 md:py-32 px-4 md:px-20">
+      <p class="text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-20 reveal">El trabajo</p>
+
+      <div class="max-w-5xl grid md:grid-cols-3 gap-1">
+
+        <div class="offer-card border border-[#F5F2EB]/10 p-6 md:p-12 reveal">
+          <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-6 md:mb-8">01</p>
+          <h3 class="text-xl md:text-2xl mb-4 md:mb-6 leading-snug" style="font-family: 'Playfair Display', serif;">
+            Reprogramación Mental Subconsciente
+          </h3>
+          <p class="text-[#F5F2EB]/60 leading-loose text-sm">
+            No analizamos el síntoma. Reprogramamos el patrón que lo genera y lo cambiamos de raíz.
+          </p>
+        </div>
+
+        <div class="offer-card border border-[#F5F2EB]/10 p-6 md:p-12 reveal">
+          <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-6 md:mb-8">02</p>
+          <h3 class="text-xl md:text-2xl mb-4 md:mb-6 leading-snug" style="font-family: 'Playfair Display', serif;">
+            Neurociencias Aplicadas a la Regulación Emocional
+          </h3>
+          <p class="text-[#F5F2EB]/60 leading-loose text-sm">
+            Prácticas para dominar la biología del enfoque con el objetivo de lograr estabilidad emocional bajo presión.
+          </p>
+        </div>
+
+        <div class="offer-card border border-[#F5F2EB]/10 p-6 md:p-12 reveal">
+          <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-6 md:mb-8">03</p>
+          <h3 class="text-xl md:text-2xl mb-4 md:mb-6 leading-snug" style="font-family: 'Playfair Display', serif;">
+            Cambio de Hábitos de Alto Rendimiento
+          </h3>
+          <p class="text-[#F5F2EB]/60 leading-loose text-sm">
+            Sincronizamos la arquitectura mental con la emocional para consolidar una disciplina de alto impacto.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="sep-line border-t border-[#F5F2EB]/10 mx-4 md:mx-20"></div>
+
+    <!-- ── Formato ────────────────────────────────────────── -->
+    <section class="py-16 md:py-32 px-4 md:px-20 reveal">
+      <div class="max-w-5xl grid md:grid-cols-[1fr_2fr] gap-20 items-start">
+        <div>
+          <p class="text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-4">Formato de la</p>
+          <h2 class="text-4xl leading-tight" style="font-family: 'Playfair Display', serif;">
+            <em>Mentoría.</em>
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div>
+            <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-4">Modalidad 1 a 1</p>
+            <ul class="text-[#F5F2EB]/60 leading-loose text-sm space-y-2">
+              <li>• 3 meses de duración total</li>
+              <li>• 12 sesiones personalizadas semanales</li>
+              <li>• 1:30 h por sesión</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-4">Acompañamiento entre sesiones</p>
+            <p class="text-[#F5F2EB]/60 leading-loose text-sm mb-4">
+              El trabajo no se corta cuando termina la sesión. El cambio se sostiene en el día a día.
+            </p>
+            <ul class="text-[#F5F2EB]/60 leading-loose text-sm space-y-2">
+              <li>• Acompañamiento en momentos críticos</li>
+              <li>• Ajustes personalizados según tu realidad operativa</li>
+              <li>• Material exclusivo adaptado a tu perfil y tu capital</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep-line border-t border-[#F5F2EB]/10 mx-4 md:mx-20"></div>
+
+    <!-- ── Sobre Romina ───────────────────────────────────── -->
+    <section id="sobre-mi" class="py-16 md:py-32 px-4 md:px-20 reveal">
+      <div class="max-w-5xl grid md:grid-cols-[1fr_2fr] gap-20 items-start">
+        <div>
+          <p class="text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-4">Sobre Mí</p>
+          <div class="w-8 h-px bg-[#D2B48C]"></div>
+        </div>
+        <div>
+          <h2 class="text-4xl md:text-5xl leading-tight mb-10"
+              style="font-family: 'Playfair Display', serif;">
+            Romina <em>Gaudiano.</em>
+          </h2>
+          <p class="text-[#F5F2EB]/70 leading-loose text-lg mb-8">
+            Diplomada en Neurociencias, Neurocoach y especialista en reprogramación de la mente subconsciente, con más de 4500 procesos de transformación real.
+          </p>
+          <blockquote class="border-l border-[#D2B48C]/40 pl-6 text-[#F5F2EB]/50 leading-loose italic">
+            "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él. El trabajo no se corta cuando termina la sesión; el cambio se sostiene en el día a día."
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep-line border-t border-[#F5F2EB]/10 mx-4 md:mx-20"></div>
+
+    <!-- ── Resultados ─────────────────────────────────────── -->
+    <section class="py-16 md:py-32 px-4 md:px-20">
+      <p class="text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-20 reveal">
+        Resultados que buscan quienes eligen esta mentoría
+      </p>
+      <div class="max-w-5xl grid md:grid-cols-3 gap-16">
+        {["Mayor estabilidad emocional", "Decisiones más conscientes", "Hábitos mentales sólidos", "Menor reactividad", "Protección del capital", "Confianza interna sostenida"].map(r => (
+          <div class="reveal">
+            <div class="w-4 h-px bg-[#D2B48C] mb-6"></div>
+            <p class="text-lg text-[#F5F2EB]/70" style="font-family: 'Playfair Display', serif;">{r}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div class="sep-line border-t border-[#F5F2EB]/10 mx-4 md:mx-20"></div>
+
+    <!-- ── CTA Final ──────────────────────────────────────── -->
+    <section id="contacto" class="py-20 md:py-40 px-4 md:px-20 text-center reveal">
+      <p class="text-xs tracking-[0.4em] uppercase text-[#D2B48C] mb-6">Mentoría 1:1 · Cupos limitados</p>
+      <h2 class="text-4xl md:text-5xl lg:text-7xl leading-tight mb-8 md:mb-10 max-w-3xl mx-auto"
+          style="font-family: 'Playfair Display', serif;">
+        Mayor estabilidad.<br />
+        <em>Decisiones limpias.</em>
+      </h2>
+      <p class="text-[#F5F2EB]/50 max-w-lg mx-auto mb-16 leading-relaxed">
+        Hábitos mentales sólidos para proteger tu capital. Contactá ahora para reservar tu lugar.
+      </p>
+      <a href="mailto:hola@rominagaudiano.com"
+        class="inline-block text-xs tracking-[0.3em] uppercase border border-[#F5F2EB]/20 px-14 py-5 hover:bg-[#F5F2EB] hover:text-[#1A1A1A] transition-all duration-500">
+        Aplicá Acá
+      </a>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer class="border-t border-[#F5F2EB]/10 px-4 md:px-20 py-8 md:py-10 flex justify-between items-center">
+      <span class="text-xs tracking-[0.3em] uppercase text-[#F5F2EB]/30">Romina Gaudiano</span>
+      <span class="text-xs text-[#F5F2EB]/20">© 2025</span>
+    </footer>
+
+  </div>
+</BaseLayout>

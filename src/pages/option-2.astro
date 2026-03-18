@@ -1,0 +1,339 @@
+---
+// Option 2 — Warm Minimalist / Organic
+// Cream (#F5F2EB) base, tan accents (#D2B48C), Montserrat + Inter, asymmetric grid
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Oasis de Claridad | Romina Gaudiano"
+  fonts="Montserrat:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;1,300"
+>
+  <style is:global>
+    /* Scrollbar — warm pill: wider, fully rounded, floats off track */
+    ::-webkit-scrollbar              { width: 6px; }
+    ::-webkit-scrollbar-track        { background: transparent; }
+    ::-webkit-scrollbar-thumb        {
+      background: #D2B48C;
+      border-radius: 99px;
+      border: 2px solid #F5F2EB;
+      background-clip: padding-box;
+    }
+    ::-webkit-scrollbar-thumb:hover  {
+      background: #B8956A;
+      border-color: #F5F2EB;
+    }
+    * { scrollbar-width: thin; scrollbar-color: #D2B48C transparent; }
+    ::selection { background: #D2B48C; color: #1A1A1A; }
+
+    .t-rule {
+      width: 0;
+      animation: rule-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+    @keyframes rule-grow { from { width: 0; } to { width: 2rem; } }
+
+    .card-warm {
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                  border-color 0.5s, box-shadow 0.55s;
+    }
+    .card-warm:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(210,180,140,0.15);
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: #D2B48C;
+      transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav-link:hover::after { width: 100%; }
+  </style>
+
+  <div class="bg-[#F5F2EB] text-[#1A1A1A] min-h-screen" style="font-family: 'Inter', sans-serif;">
+
+    <!-- ── Nav ───────────────────────────────────────────── -->
+    <nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 md:px-16 py-6 bg-[#F5F2EB]/90 backdrop-blur-sm">
+      <span class="text-xs tracking-[0.25em] uppercase text-[#1A1A1A]/50" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+        Romina Gaudiano
+      </span>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#mentoria" class="nav-link text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/40 hover:text-[#D2B48C] transition-colors duration-300" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Mentoría</a>
+        <a href="#sobre-mi" class="nav-link text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/40 hover:text-[#D2B48C] transition-colors duration-300" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Sobre Mí</a>
+        <a href="#protocolo" class="nav-link text-xs tracking-[0.2em] uppercase text-[#1A1A1A]/40 hover:text-[#D2B48C] transition-colors duration-300" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Protocolo</a>
+      </div>
+      <a href="#contacto"
+        class="text-xs tracking-[0.2em] uppercase bg-[#1A1A1A] text-[#F5F2EB] px-6 py-3 hover:bg-[#D2B48C] hover:text-[#1A1A1A] transition-colors duration-300"
+        style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+        Aplicá Acá
+      </a>
+    </nav>
+
+    <!-- ── Hero ──────────────────────────────────────────── -->
+    <section class="min-h-screen grid md:grid-cols-[1fr_1fr] pt-24">
+
+      <div class="flex flex-col justify-center px-8 md:px-16 py-20 md:py-0">
+        <p class="hero-item-left text-xs tracking-[0.35em] uppercase text-[#D2B48C] mb-8"
+           style="font-family: 'Montserrat', sans-serif; font-weight: 500; animation-delay: 0.2s;">
+          Mentoría 1:1 – CryptoMind Pro Elite
+        </p>
+        <h1 class="hero-item-left text-5xl md:text-6xl leading-[1.1] mb-8 text-[#1A1A1A]"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 300; animation-delay: 0.45s;">
+          El poder de una<br />
+          <span style="font-weight: 600;">reprogramación<br />mental.</span>
+        </h1>
+        <p class="hero-item-left text-base leading-relaxed text-[#1A1A1A]/60 max-w-sm mb-2"
+           style="font-weight: 300; animation-delay: 0.7s;">
+          Reprogramación Mental y Cambio de Hábitos para Traders e Inversores.
+        </p>
+        <p class="hero-item-left text-sm leading-relaxed text-[#1A1A1A]/40 max-w-sm mb-10"
+           style="font-weight: 300; animation-delay: 0.78s;">
+          Diseñada para quienes buscan optimizar su rendimiento interno, sostener claridad emocional y tomar decisiones conscientes bajo presión.
+        </p>
+        <div class="hero-item-left flex gap-4 flex-wrap" style="animation-delay: 0.9s;">
+          <a href="#contacto"
+            class="text-xs tracking-[0.2em] uppercase bg-[#1A1A1A] text-[#F5F2EB] px-8 py-4 hover:bg-[#D2B48C] hover:text-[#1A1A1A] transition-colors duration-300"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+            Aplicar Acá
+          </a>
+          <a href="#mentoria"
+            class="text-xs tracking-[0.2em] uppercase border border-[#1A1A1A]/20 px-8 py-4 hover:border-[#1A1A1A] transition-colors duration-300"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 400;">
+            Saber más
+          </a>
+        </div>
+      </div>
+
+      <div class="relative hidden md:block img-zoom hero-item-right" style="animation-delay: 0.15s; overflow: hidden;">
+        <img src="/gaudiano2.jpg" alt="Romina Gaudiano" class="w-full h-full object-cover object-top" />
+        <div class="absolute inset-0 bg-[#D2B48C]/10 mix-blend-multiply"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-[#F5F2EB] via-[#F5F2EB]/80 to-transparent">
+          <p class="text-lg leading-relaxed text-[#1A1A1A]/70 mb-3"
+             style="font-family: 'Inter', sans-serif; font-style: italic; font-weight: 300;">
+            "El verdadero activo no es el mercado, sino la mente que decide dentro de él."
+          </p>
+          <span class="text-xs tracking-[0.3em] uppercase text-[#D2B48C]"
+                style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+            Romina Gaudiano
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── ¿Por qué? ──────────────────────────────────────── -->
+    <section id="mentoria" class="py-16 md:py-32 px-6 md:px-16 bg-[#1A1A1A] text-[#F5F2EB]">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-[2fr_3fr] gap-16 items-start">
+
+        <div class="reveal">
+          <p class="text-xs tracking-[0.35em] uppercase text-[#D2B48C] mb-6"
+             style="font-family: 'Montserrat', sans-serif; font-weight: 500;">La pregunta clave</p>
+          <h2 class="text-4xl md:text-5xl leading-tight text-[#F5F2EB]"
+              style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+            ¿Por qué una mentoría de<br />
+            <span style="font-weight: 600; color: #D2B48C;">reprogramación mental?</span>
+          </h2>
+          <div class="mt-12 flex gap-3">
+            <div class="w-2 h-2 rounded-full bg-[#D2B48C] mt-1"></div>
+            <div class="w-2 h-2 rounded-full bg-[#D2B48C]/40 mt-1"></div>
+            <div class="w-2 h-2 rounded-full bg-[#D2B48C]/20 mt-1"></div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="text-lg leading-loose text-[#F5F2EB]/70 mb-6" style="font-weight: 300;">
+            Porque los hábitos que determinan tus decisiones económicas y financieras no son conscientes, no se corrigen con fuerza de voluntad, y se sostienen en patrones neuronales automáticos.
+          </p>
+          <p class="text-lg leading-loose text-[#F5F2EB]/70 mb-6" style="font-weight: 300;">
+            Las neurociencias demuestran que la toma de decisiones financieras se activa desde el subconsciente, <em>incluso en personas altamente racionales.</em>
+          </p>
+          <p class="text-base leading-loose text-[#F5F2EB]/50 mb-10" style="font-weight: 300;">
+            Esta mentoría no es para aprender a operar. Trabaja donde realmente se define el resultado: tu respuesta interna frente al riesgo, la ganancia y la pérdida.
+          </p>
+          <p class="text-sm tracking-[0.15em] uppercase text-[#D2B48C]"
+             style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+            CryptoMind Pro Elite — Mentoría 1:1
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Protocolo ──────────────────────────────────────── -->
+    <section id="protocolo" class="py-16 md:py-32 px-6 md:px-16">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="mb-20 reveal">
+          <p class="text-xs tracking-[0.35em] uppercase text-[#D2B48C] mb-4"
+             style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Protocolo</p>
+          <h2 class="text-4xl md:text-5xl text-[#1A1A1A]"
+              style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+            Tres pilares.<br /><span style="font-weight: 600;">Un solo resultado.</span>
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+          <div class="card-warm bg-[#D2B48C]/10 p-8 md:p-14 border border-[#D2B48C]/20 hover:border-[#D2B48C]/60 transition-colors duration-500 reveal">
+            <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-6 md:mb-8"
+               style="font-family: 'Montserrat', sans-serif; font-weight: 500;">01</p>
+            <h3 class="text-xl md:text-2xl mb-4 md:mb-6 text-[#1A1A1A]"
+                style="font-family: 'Montserrat', sans-serif; font-weight: 400;">
+              Reprogramación Mental<br /><span style="font-weight: 600;">Subconsciente</span>
+            </h3>
+            <p class="text-[#1A1A1A]/60 leading-relaxed mb-10" style="font-weight: 300;">
+              No analizamos el síntoma. Reprogramamos el patrón que lo genera y lo cambiamos de raíz.
+            </p>
+          </div>
+
+          <div class="card-warm bg-[#1A1A1A] text-[#F5F2EB] p-8 md:p-14 md:mt-12 hover:bg-[#1A1A1A]/90 transition-colors duration-500 reveal">
+            <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-6 md:mb-8"
+               style="font-family: 'Montserrat', sans-serif; font-weight: 500;">02</p>
+            <h3 class="text-xl md:text-2xl mb-4 md:mb-6 text-[#F5F2EB]"
+                style="font-family: 'Montserrat', sans-serif; font-weight: 400;">
+              Neurociencias Aplicadas<br /><span style="font-weight: 600;">a la Regulación Emocional</span>
+            </h3>
+            <p class="text-[#F5F2EB]/60 leading-relaxed mb-10" style="font-weight: 300;">
+              Prácticas para dominar la biología del enfoque con el objetivo de lograr estabilidad emocional bajo presión.
+            </p>
+          </div>
+
+          <div class="card-warm bg-[#D2B48C]/10 p-8 md:p-14 border border-[#D2B48C]/20 hover:border-[#D2B48C]/60 transition-colors duration-500 reveal md:col-span-2">
+            <p class="text-xs tracking-[0.3em] uppercase text-[#D2B48C] mb-8"
+               style="font-family: 'Montserrat', sans-serif; font-weight: 500;">03</p>
+            <div class="grid md:grid-cols-2 gap-8">
+              <h3 class="text-2xl text-[#1A1A1A]"
+                  style="font-family: 'Montserrat', sans-serif; font-weight: 400;">
+                Cambio de Hábitos<br /><span style="font-weight: 600;">de Alto Rendimiento</span>
+              </h3>
+              <p class="text-[#1A1A1A]/60 leading-relaxed" style="font-weight: 300;">
+                Sincronizamos la arquitectura mental con la emocional para consolidar una disciplina de alto impacto.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Formato ────────────────────────────────────────── -->
+    <section class="py-16 md:py-32 px-6 md:px-16 bg-[#D2B48C]/10">
+      <div class="max-w-6xl mx-auto">
+        <p class="text-xs tracking-[0.35em] uppercase text-[#D2B48C] mb-20 reveal"
+           style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Formato de la Mentoría</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+
+          <figure class="reveal">
+            <div class="t-rule h-px bg-[#D2B48C] mb-8"></div>
+            <h4 class="text-lg mb-4 text-[#1A1A1A]"
+                style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Modalidad 1 a 1</h4>
+            <ul class="text-[#1A1A1A]/60 leading-relaxed space-y-2" style="font-weight: 300;">
+              <li>• 3 meses de duración total</li>
+              <li>• 12 sesiones personalizadas semanales</li>
+              <li>• 1:30 h por sesión</li>
+            </ul>
+          </figure>
+
+          <figure class="reveal">
+            <div class="t-rule h-px bg-[#D2B48C] mb-8"></div>
+            <h4 class="text-lg mb-4 text-[#1A1A1A]"
+                style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Acompañamiento entre sesiones</h4>
+            <p class="text-[#1A1A1A]/60 leading-relaxed mb-4" style="font-weight: 300;">
+              El trabajo no se corta cuando termina la sesión. El cambio se sostiene en el día a día.
+            </p>
+            <ul class="text-[#1A1A1A]/60 leading-relaxed space-y-2" style="font-weight: 300;">
+              <li>• Acompañamiento en momentos críticos</li>
+              <li>• Ajustes personalizados según tu realidad operativa</li>
+            </ul>
+          </figure>
+
+          <figure class="reveal">
+            <div class="t-rule h-px bg-[#D2B48C] mb-8"></div>
+            <h4 class="text-lg mb-4 text-[#1A1A1A]"
+                style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Material Exclusivo de Apoyo</h4>
+            <p class="text-[#1A1A1A]/60 leading-relaxed" style="font-weight: 300;">
+              Adaptado a tu perfil, tu capital y tu forma de operar.
+            </p>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Sobre Romina ───────────────────────────────────── -->
+    <section id="sobre-mi" class="py-16 md:py-32 px-6 md:px-16">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-[3fr_2fr] gap-16 items-center">
+
+        <div class="reveal">
+          <p class="text-xs tracking-[0.35em] uppercase text-[#D2B48C] mb-8"
+             style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Sobre Mí</p>
+          <h2 class="text-4xl md:text-5xl leading-tight text-[#1A1A1A] mb-8"
+              style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+            Romina <span style="font-weight: 600;">Gaudiano.</span>
+          </h2>
+          <p class="text-lg leading-loose text-[#1A1A1A]/60 mb-8" style="font-weight: 300;">
+            Diplomada en Neurociencias, Neurocoach y especialista en reprogramación de la mente subconsciente, con más de 4500 procesos de transformación real.
+          </p>
+          <blockquote class="border-l-2 border-[#D2B48C] pl-6 text-[#1A1A1A]/50 leading-loose italic"
+                      style="font-weight: 300;">
+            "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él."
+          </blockquote>
+        </div>
+
+        <div class="reveal">
+          <div class="grid grid-cols-2 gap-4">
+            {["Mayor estabilidad emocional", "Decisiones más conscientes", "Hábitos mentales sólidos", "Menor reactividad", "Protección del capital", "Confianza interna sostenida"].map(r => (
+              <div class="bg-[#D2B48C]/10 p-5 border border-[#D2B48C]/20">
+                <p class="text-sm text-[#1A1A1A]/70" style="font-weight: 400;">{r}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CTA Final ──────────────────────────────────────── -->
+    <section id="contacto" class="py-20 md:py-40 px-6 md:px-16">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-[3fr_2fr] gap-16 items-center">
+
+        <div class="reveal">
+          <p class="text-xs tracking-[0.35em] uppercase text-[#D2B48C] mb-8"
+             style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+            Mentoría 1:1 · Cupos limitados
+          </p>
+          <h2 class="text-5xl md:text-6xl leading-tight text-[#1A1A1A]"
+              style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+            Mayor estabilidad.<br />
+            <span style="font-weight: 600;">Decisiones limpias.</span>
+          </h2>
+        </div>
+
+        <div class="reveal flex flex-col gap-4">
+          <p class="text-sm text-[#1A1A1A]/50 leading-relaxed" style="font-weight: 300;">
+            Hábitos mentales sólidos para proteger tu capital. Contactá ahora para reservar tu lugar.
+          </p>
+          <a href="mailto:hola@rominagaudiano.com"
+            class="text-center text-xs tracking-[0.2em] uppercase bg-[#1A1A1A] text-[#F5F2EB] px-8 py-5 hover:bg-[#D2B48C] hover:text-[#1A1A1A] transition-colors duration-300"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 500;">
+            Aplicá Acá
+          </a>
+          <p class="text-xs text-[#1A1A1A]/30 text-center" style="font-weight: 300;">
+            Respondemos en menos de 24 hs.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer class="border-t border-[#1A1A1A]/10 px-8 md:px-16 py-10 flex justify-between items-center">
+      <span class="text-xs tracking-[0.3em] uppercase text-[#1A1A1A]/30"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 400;">Romina Gaudiano</span>
+      <span class="text-xs text-[#1A1A1A]/20">© 2025</span>
+    </footer>
+
+  </div>
+</BaseLayout>

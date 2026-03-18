@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* ─── Brand Tokens ─────────────────────────────────────── */
+@theme {
+  --color-cream:    #F5F2EB;
+  --color-tan:      #D2B48C;
+  --color-ink:      #1A1A1A;
+  --color-navy:     #000080;
+  --color-olive:    #4B5320;
+  --color-burgundy: #75150D;
+}
+
+/* ─── Base ──────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+/* ─── Page entrance ─────────────────────────────────────── */
+@keyframes page-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+body { animation: page-enter 0.7s ease both; }
+
+/* ─── Text selection ────────────────────────────────────── */
+::selection { background: #D2B48C; color: #1A1A1A; }
+
+/* ─── Custom cursor ─────────────────────────────────────── */
+#g-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  margin-left: -4px; margin-top: -4px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  will-change: left, top;
+  transition:
+    width  0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.3s;
+}
+#g-cursor.hovered {
+  width: 40px; height: 40px;
+  margin-left: -20px; margin-top: -20px;
+  opacity: 0.45;
+}
+@media (hover: none) { #g-cursor { display: none; } }
+
+/* ─── Nav scroll state ──────────────────────────────────── */
+nav.nav-scrolled {
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ─── Hero stagger keyframes ────────────────────────────── */
+@keyframes hero-in {
+  from { opacity: 0; translate: 0 22px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes hero-in-left {
+  from { opacity: 0; translate: -32px 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes hero-in-right {
+  from { opacity: 0; translate: 32px 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes rule-grow {
+  from { width: 0; opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-item {
+  opacity: 0;
+  animation: hero-in 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.hero-item-left {
+  opacity: 0;
+  animation: hero-in-left 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.hero-item-right {
+  opacity: 0;
+  animation: hero-in-right 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* ─── Scroll-driven reveals ─────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; translate: 0 28px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.reveal {
+  animation: fade-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 35%;
+}
+.reveal-fade {
+  animation: fade-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 35%;
+}
+
+/* ─── Image hover zoom ──────────────────────────────────── */
+.img-zoom { overflow: hidden; }
+.img-zoom img {
+  transition: transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 1.1s;
+}
+.img-zoom:hover img { transform: scale(1.04); }
+
+/* ─── Card lift ─────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.card-lift:hover { transform: translateY(-7px); }
+
+/* ─── Animated underline link ───────────────────────────── */
+.link-line {
+  position: relative;
+  display: inline-block;
+}
+.link-line::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 0; height: 1px;
+  background: currentColor;
+  transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.link-line:hover::after { width: 100%; }
