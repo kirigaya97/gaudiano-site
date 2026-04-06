@@ -278,7 +278,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <div id="o6-cursor-dot" class="hidden md:block"></div>
   <div id="o6-cursor-ring" class="hidden md:block"></div>
 
-  <div class="o6-page" style="background: var(--navy); color: var(--cream); min-height: 100vh; font-family: 'Lora', serif;">
+  <div class="o6-page overflow-x-hidden max-w-[100vw]" style="background: var(--navy); color: var(--cream); min-height: 100vh; font-family: 'Lora', serif;">
 
     <!-- Hamburger Toggle Input (Hidden) & Overlay -->
     <input type="checkbox" id="o6-menu-toggle" class="hidden peer" />
@@ -296,7 +296,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
 
     <!-- ── Nav ───────────────────────────────────────────── -->
-    <nav class="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-4 md:px-10 py-5 md:py-6 transition-shadow duration-500"
+    <nav class="fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-6 md:px-10 py-5 md:py-6 transition-shadow duration-500"
          style="background: rgba(27,38,59,0.93); backdrop-filter: blur(8px);">
 
       <div class="flex items-center gap-4">
@@ -338,7 +338,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
              style="color: var(--cashm); animation-delay: 0.35s;">
             Mentoría 1:1 – CryptoMind Pro Elite
           </p>
-          <h1 class="o6-hero-item text-4xl md:text-6xl lg:text-8xl leading-[1.05] mb-8 md:mb-12"
+          <h1 class="o6-hero-item text-[2rem] leading-tight md:text-6xl lg:text-8xl md:leading-[1.05] mb-8 md:mb-12"
               style="font-family: 'Playfair Display', serif; animation-delay: 0.6s;">
             El poder de una mente clara<br />
             <em style="color: var(--cashm);">para invertir mejor.</em>
@@ -391,7 +391,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
     <!-- ── ¿Por qué? ──────────────────────────────────────── -->
-    <section id="mentoria" class="py-16 md:py-32 px-4 md:px-20 o6-reveal">
+    <section id="mentoria" class="py-16 md:py-32 px-6 md:px-20 o6-reveal">
       <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr_1.8fr] gap-12 md:gap-24 items-center">
         
         <div>
@@ -399,8 +399,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <p class="text-xs tracking-[0.4em] uppercase mb-4" style="color: var(--cashm);">La pregunta clave</p>
             <div class="w-12 h-px" style="background: var(--cashm);"></div>
           </div>
-          <div class="relative group">
-            <div class="absolute -inset-4 border border-cashm/20 translate-x-2 translate-y-2 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-700"></div>
+          <div class="relative group mx-2 md:mx-0 mt-4 md:mt-0">
+            <div class="absolute -inset-2 md:-inset-4 border border-cashm/20 translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-700"></div>
             <div class="overflow-hidden aspect-[4/5] relative z-10 shadow-2xl">
               <img src="/trader-analysis.png" alt="Análisis de trading profesional" 
                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
@@ -432,7 +432,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
     <!-- ── Protocolo (option 3 hover rows + Playfair + opt-4 palette) ── -->
-    <section id="protocolo" class="py-16 md:py-32 px-4 md:px-20"
+    <section id="protocolo" class="py-16 md:py-32 px-6 md:px-20"
              style="background: var(--cream); color: var(--charcoal);">
       <div class="max-w-5xl mx-auto">
 
@@ -444,9 +444,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </h2>
         </div>
 
-        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
+        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
              style="border-color: rgba(27,38,59,0.1);">
-          <p class="text-4xl md:text-6xl"
+          <p class="text-3xl md:text-6xl"
              style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.07); line-height: 1; font-weight: 700;">01</p>
           <div>
             <h3 class="text-xl md:text-3xl mb-3 md:mb-4"
@@ -466,9 +466,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </a>
         </div>
 
-        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
+        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
              style="border-color: rgba(27,38,59,0.1);">
-          <p class="text-4xl md:text-6xl"
+          <p class="text-3xl md:text-6xl"
              style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.07); line-height: 1; font-weight: 700;">02</p>
           <div>
             <h3 class="text-xl md:text-3xl mb-3 md:mb-4"
@@ -488,9 +488,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </a>
         </div>
 
-        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
+        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
              style="border-color: rgba(27,38,59,0.1);">
-          <p class="text-4xl md:text-6xl"
+          <p class="text-3xl md:text-6xl"
              style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.07); line-height: 1; font-weight: 700;">03</p>
           <div>
             <h3 class="text-xl md:text-3xl mb-3 md:mb-4"
@@ -516,7 +516,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <!-- ── Pilares (Dynamic Hover Section) ── -->
-    <section id="o6-pilares" class="py-16 md:py-32 px-4 md:px-20 overflow-hidden">
+    <section id="o6-pilares" class="py-16 md:py-32 px-6 md:px-20 overflow-hidden">
       <div class="max-w-5xl mx-auto">
 
         <div class="text-center mb-16 o6-reveal">
@@ -570,7 +570,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
     <!-- ── Sobre Mí + Resultados (Text Refined + Light Theme) ── -->
-    <section id="sobre-mi" class="relative py-16 md:py-32 px-4 md:px-20 overflow-hidden" style="background: var(--cream); color: var(--charcoal);">
+    <section id="sobre-mi" class="relative py-16 md:py-32 px-6 md:px-20 overflow-hidden" style="background: var(--cream); color: var(--charcoal);">
       <!-- Texture background with light overlay (Watermark protection) -->
       <div class="absolute inset-0 z-0">
         <img src="/decorative-abstract.png" alt=""
@@ -646,7 +646,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
     <!-- ── CTA Final (Background Image + Text Refinement) ────── -->
-    <section id="contacto" class="relative py-24 md:py-48 px-4 md:px-20 text-center overflow-hidden">
+    <section id="contacto" class="relative py-24 md:py-48 px-6 md:px-20 text-center overflow-hidden">
       <!-- Background Image with Overlay (Directly related to traders) -->
       <div class="absolute inset-0 z-0 scale-[1.05]">
         <img src="/trading_graphs_bg.png" alt="" class="w-full h-full object-cover blur-[2px]" />
@@ -666,7 +666,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           Hábitos mentales sólidos para proteger tu capital. <strong>Contactate</strong> ahora para reservar tu lugar.
         </p>
         <a href="mailto:hola@rominagaudiano.com"
-           class="inline-block text-xs tracking-[0.3em] uppercase px-14 py-5 transition-all duration-500 shadow-2xl"
+           class="inline-block text-xs tracking-[0.3em] uppercase px-10 md:px-14 py-5 transition-all duration-500 shadow-2xl"
            style="background: var(--cashm); color: var(--navy);"
            onmouseover="this.style.background='var(--cream)'; this.style.color='var(--navy)'"
            onmouseout="this.style.background='var(--cashm)'; this.style.color='var(--navy)'">
@@ -677,7 +677,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <!-- ── Footer ─────────────────────────────────────────── -->
-    <footer class="px-4 md:px-20 py-10 md:py-16 flex flex-col md:flex-row justify-between items-center gap-8"
+    <footer class="px-6 md:px-20 py-10 md:py-16 flex flex-col md:flex-row justify-between items-center gap-8"
             style="background: var(--charcoal); border-top: 1px solid rgba(215,201,180,0.1);">
       
       <div class="flex flex-col items-center md:items-start gap-4">
