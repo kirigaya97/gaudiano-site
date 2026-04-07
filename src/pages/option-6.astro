@@ -283,10 +283,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <!-- Hamburger Toggle Input (Hidden) & Overlay -->
     <input type="checkbox" id="o6-menu-toggle" class="hidden peer" />
     <div id="o6-menu-overlay" class="fixed inset-0 w-full h-full bg-[#2A2A2A]/98 z-[120] opacity-0 pointer-events-none transition-opacity duration-500 flex items-center justify-center">
+      <!-- Close Button (X) -->
+      <label for="o6-menu-toggle" class="absolute top-8 left-8 md:top-12 md:left-12 text-cream/30 hover:text-cashm text-4xl md:text-5xl cursor-pointer transition-colors z-[130] font-light">
+        ×
+      </label>
+
       <div class="o6-menu-content transform -translate-y-10 transition-transform duration-700 flex flex-col items-center gap-8 md:gap-10 text-center px-6">
         <a href="/option-6"  class="o6-menu-link text-3xl md:text-4xl text-cream tracking-tight">Home</a>
         <a href="#mentoria"  class="o6-menu-link text-3xl md:text-4xl text-cream tracking-tight">Reprogramación mental para traders: ¿Por qué?</a>
-        <a href="#protocolo" class="o6-menu-link text-3xl md:text-4xl text-cream tracking-tight">Cómo se trabaja</a>
+        <a href="#protocolo" class="o6-menu-link text-3xl md:text-4xl text-cream tracking-tight">Formato de la Mentoría</a>
         <a href="#sobre-mi"  class="o6-menu-link text-3xl md:text-4xl text-cream tracking-tight">Sobre Mí</a>
         
         <label for="o6-menu-toggle" class="mt-8 text-[10px] tracking-[0.4em] uppercase text-cashm/50 cursor-pointer hover:text-cream transition-colors">
@@ -322,23 +327,90 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </nav>
 
     <!-- ── Hero ──────────────────────────────────────────── -->
-    <section class="grid md:grid-cols-2" style="min-height: 100vh;">
+    <!--
+      SECTION LAYOUT NOTES:
+      - 'relative'        → required so the mobile portrait (absolute) is positioned relative to this section
+      - 'overflow-hidden' → clips the mobile portrait that intentionally bleeds past the right edge
+      - 'grid md:grid-cols-2' → 2-column grid on desktop, single stacked column on mobile
+      - 'min-height: 100vh' → always fills the full viewport height
+    -->
+    <section class="relative grid md:grid-cols-2 overflow-hidden" style="min-height: 100vh;">
 
+      <!--
+        ═══════════════════════════════════════════════════════════
+        DESKTOP PORTRAIT — Left column of the 2-col grid
+        - 'hidden md:block' → only rendered on md+ screens (≥768px)
+        - Gradient goes transparent → navy (left to right) to blend into the text column on the right
+        - No horizontal mirror: she faces right, toward the text content
+        ═══════════════════════════════════════════════════════════
+      -->
       <div class="relative hidden md:block o6-hero-img overflow-hidden">
         <img src="/gaudiano1.jpg" alt="Romina Gaudiano"
              class="absolute inset-0 w-full h-full object-cover object-top"
              style="filter: grayscale(25%) contrast(1.05);" />
+        <!-- Gradient: covers the right edge of the image to blend into the text column -->
         <div class="absolute inset-0"
              style="background: linear-gradient(to right, transparent, var(--navy));"></div>
       </div>
 
-      <div class="flex flex-col justify-end pb-24 md:pb-36 px-6 md:px-16 pt-20 md:pt-24">
+      <!--
+        ═══════════════════════════════════════════════════════════
+        MOBILE PORTRAIT — Cinematic right-side overlay
+        - 'absolute md:hidden' → only on mobile; removed from grid flow so text overlaps it
+        - 'inset-y-0' → fills the full section height from top to bottom
+        - 'z-0' → renders behind the content column (which is z-10)
+
+        PROPORTIONS (adjust these to reframe the portrait):
+        • width: 80vw     → total image div width. Increase to show more of her body.
+        • right: -20vw    → shifts the div 20vw past the right viewport edge.
+                            Result: 80vw - 20vw = 60vw visible (~3/4 on screen, 1/4 off-screen right).
+                            Make more negative to bleed more off-screen.
+        ═══════════════════════════════════════════════════════════
+      -->
+      <div class="absolute md:hidden inset-y-0 z-0"
+           style="width: 80vw; right: -20vw;">
+
+        <!--
+          Portrait image:
+          - 'transform: scaleX(-1)' → mirrors horizontally so she faces LEFT (toward the text)
+          - 'object-top'            → anchors to the top (face/upper body stays in frame)
+          - Same grayscale/contrast filter as the desktop version for visual consistency
+          Note: alt="" intentional — this is decorative/duplicate, screen readers use the desktop version
+        -->
+        <img src="/gaudiano1.jpg" alt=""
+             class="absolute inset-0 w-full h-full object-cover object-top"
+             style="filter: grayscale(25%) contrast(1.05); transform: scaleX(-1);" />
+
+        <!--
+          Left gradient overlay:
+          - Starts at full navy (var(--navy)) on the LEFT edge of this div (~40vw from screen left)
+          - Fades through a semi-transparent mid-stop at 55%
+          - Reaches transparent at 80%, letting the portrait come through on the right
+
+          HOW TO ADJUST:
+          • Move "55%" left (e.g. 40%) → shows more of her face earlier
+          • Move "55%" right (e.g. 70%) → stronger cover, less face visible through gradient
+          • Change the mid rgba() alpha (0.4) → lower = more see-through in the middle
+        -->
+        <div class="absolute inset-0"
+             style="background: linear-gradient(to right, var(--navy) 0%, rgba(27,38,59,0.7) 95%, transparent 80%);"></div>
+      </div>
+
+      <!--
+        ═══════════════════════════════════════════════════════════
+        CONTENT COLUMN — Text, headline, CTA
+        - 'relative z-10' → ensures text renders ABOVE the mobile absolute portrait (z-0)
+        - On mobile: full-width, content anchored to the bottom (justify-end)
+        - On desktop: right column of the 2-col grid
+        ═══════════════════════════════════════════════════════════
+      -->
+      <div class="flex flex-col justify-end pb-24 md:pb-36 px-6 md:px-16 pt-20 md:pt-24 relative z-10">
         <div class="max-w-4xl">
           <p class="o6-hero-item text-xs tracking-[0.4em] uppercase mb-10"
              style="color: var(--cashm); animation-delay: 0.35s;">
             Mentoría 1:1 – CryptoMind Pro Elite
           </p>
-          <h1 class="o6-hero-item text-[2rem] leading-tight md:text-6xl lg:text-8xl md:leading-[1.05] mb-8 md:mb-12"
+          <h1 class="o6-hero-item text-[1.6rem] leading-tight md:text-[3rem] lg:text-[4.8rem] md:leading-[1.05] mb-8 md:mb-12"
               style="font-family: 'Playfair Display', serif; animation-delay: 0.6s;">
             El poder de una mente clara<br />
             <em style="color: var(--cashm);">para invertir mejor.</em>
@@ -364,6 +436,48 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
     </section>
+
+
+    <!-- ── New "Impacto" Section ──────────────────────────── -->
+    <section class="relative py-16 md:py-32 px-6 md:px-20 o6-reveal overflow-hidden" style="color: var(--cream);">
+      <!-- bg image + overlay -->
+      <div class="absolute inset-0 z-0">
+        <img src="/impacto-bg.png" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-[#2A2A2A]/96"></div>
+      </div>
+
+      <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-24 items-center">
+        
+        <!-- Left: Image -->
+        <div class="relative group">
+          <div class="absolute -inset-2 md:-inset-4 border border-cashm/20 translate-x-0 translate-y-0 md:translate-x-2 md:translate-y-2 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-700"></div>
+          <div class="overflow-hidden aspect-[4/3] relative z-10 shadow-2xl">
+            <img src="/impacto-trading.png" alt="Mentalidad en el trading" 
+                 class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+          </div>
+        </div>
+
+        <!-- Right: Text -->
+        <div>
+          <h2 class="text-2xl md:text-4xl lg:text-5xl leading-tight" style="font-family: 'Playfair Display', serif;">
+            ¿Te sentís como un auto <br class="hidden md:block"/> 
+            <em>de carreras sin frenos?</em>
+          </h2>
+          <h2 class="text-2xl md:text-4xl lg:text-5xl leading-tight mt-8" style="font-family: 'Playfair Display', serif;">
+            ¿Cuál es el costo emocional <br class="hidden md:block"/> 
+            <em>de tu éxito financiero?</em>
+          </h2>
+          <p class="text-lg italic mt-10 md:mt-12" style="color: var(--cashm); font-family: 'Lora', serif;">
+            La verdadera libertad está en la claridad mental.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="o6-sep mx-4 md:mx-20"
+         style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
+
 
     <!-- ── Stats strip (option 3 animated counters) ───────── -->
     <div style="background: var(--cashm); padding: 3rem 1.5rem;">
@@ -400,7 +514,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <div class="w-12 h-px" style="background: var(--cashm);"></div>
           </div>
           <div class="relative group mx-2 md:mx-0 mt-4 md:mt-0">
-            <div class="absolute -inset-2 md:-inset-4 border border-cashm/20 translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-700"></div>
+            <div class="absolute -inset-2 md:-inset-4 border border-cashm/20 translate-x-0 translate-y-0 md:translate-x-2 md:translate-y-2 transition-transform group-hover:translate-x-0 group-hover:translate-y-0 duration-700"></div>
             <div class="overflow-hidden aspect-[4/5] relative z-10 shadow-2xl">
               <img src="/trader-analysis.png" alt="Análisis de trading profesional" 
                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
@@ -421,7 +535,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p class="leading-loose text-lg mb-8" style="color: rgba(245, 242, 235, 0.75);">
             En un entorno de alta incertidumbre, el cerebro activa mecanismos de supervivencia que nublan el juicio racional. Esta mentoría te permite <em class="o6-emphasis">intervenir en el proceso biológico</em> antes de que afecte tu capital.
           </p>
-          <p class="leading-loose text-base" style="color: rgba(245, 242, 235, 0.45);">
+          <p class="leading-loose text-lg" style="color: rgba(245, 242, 235, 0.75);">
             No es casualidad que incluso traders experimentados repitan errores técnicos. El problema no es la estrategia, es la <strong class="o6-emphasis">respuesta interna frente al riesgo, la ganancia y la pérdida.</strong>
           </p>
         </div>
@@ -431,86 +545,93 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="o6-sep mx-4 md:mx-20"
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
+
     <!-- ── Protocolo (option 3 hover rows + Playfair + opt-4 palette) ── -->
     <section id="protocolo" class="py-16 md:py-32 px-6 md:px-20"
              style="background: var(--cream); color: var(--charcoal);">
       <div class="max-w-5xl mx-auto">
 
         <div class="mb-16 o6-reveal">
-          <p class="text-xs tracking-[0.4em] uppercase mb-4 o6-contrast-heading">Protocolo</p>
+          <p class="text-xs tracking-[0.4em] uppercase mb-4 o6-contrast-heading">Metodología</p>
           <h2 class="text-4xl md:text-6xl leading-tight"
               style="font-family: 'Playfair Display', serif; color: var(--navy); font-weight: 700;">
-            El trabajo.
+            Formato de la Mentoría
           </h2>
         </div>
 
-        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
+        <!-- 01 -->
+        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start o6-reveal"
              style="border-color: rgba(27,38,59,0.1);">
           <p class="text-3xl md:text-6xl"
-             style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.07); line-height: 1; font-weight: 700;">01</p>
+             style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.1); line-height: 1; font-weight: 700;">01</p>
           <div>
-            <h3 class="text-xl md:text-3xl mb-3 md:mb-4"
+            <h3 class="text-xl md:text-3xl mb-8"
                 style="font-family: 'Playfair Display', serif; color: var(--navy);">
-              Reprogramación Mental Subconsciente
+              Modalidad: 1 a 1
             </h3>
-            <p class="leading-relaxed text-sm md:text-base" style="color: rgba(42,42,42,0.55);">
-              No analizamos el síntoma. Reprogramamos el patrón que lo genera y lo cambiamos de raíz.
+            <p class="text-base md:text-lg italic leading-relaxed"
+               style="font-family: 'Lora', serif; color: rgba(42,42,42,0.65);">
+              3 meses de duración total · 12 sesiones personalizadas · 1.30hs de sesión
             </p>
           </div>
-          <a href="#contacto"
-             class="hidden md:block whitespace-nowrap text-xs tracking-[0.2em] uppercase px-6 py-4 transition-colors duration-300"
-             style="background: var(--cashm); color: var(--navy); margin-right: 1.5rem;"
-             onmouseover="this.style.background='var(--navy)'; this.style.color='var(--cream)'"
-             onmouseout="this.style.background='var(--cashm)'; this.style.color='var(--navy)'">
-            Aplicar →
-          </a>
         </div>
 
-        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
+        <!-- 02 -->
+        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start o6-reveal"
              style="border-color: rgba(27,38,59,0.1);">
           <p class="text-3xl md:text-6xl"
-             style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.07); line-height: 1; font-weight: 700;">02</p>
+             style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.1); line-height: 1; font-weight: 700;">02</p>
           <div>
-            <h3 class="text-xl md:text-3xl mb-3 md:mb-4"
+            <h3 class="text-xl md:text-3xl mb-8"
                 style="font-family: 'Playfair Display', serif; color: var(--navy);">
-              Neurociencias Aplicadas a la Regulación Emocional
+              Acompañamiento entre sesiones
             </h3>
-            <p class="leading-relaxed text-sm md:text-base" style="color: rgba(42,42,42,0.55);">
-              Prácticas para dominar la biología del enfoque con el objetivo de lograr estabilidad emocional bajo presión.
-            </p>
+            <div class="flex flex-col gap-4">
+              {[
+                "Seguimiento entre encuentros",
+                "Acompañamiento en momentos críticos",
+                "Ajustes personalizados según tu realidad operativa"
+              ].map(sub => (
+                <div class="flex items-center">
+                  <span class="text-2xl font-bold min-w-[3rem] md:min-w-[5rem] text-right" 
+                        style="font-family: 'Playfair Display', serif; color: var(--navy);">—</span>
+                  <span class="inline-block w-6 h-px bg-cashm/40 mx-4 flex-shrink-0"></span>
+                  <span class="text-xs md:text-sm tracking-[0.2em] uppercase"
+                        style="color: rgba(42,42,42,0.65);">{sub}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <a href="#contacto"
-             class="hidden md:block whitespace-nowrap text-xs tracking-[0.2em] uppercase px-6 py-4 transition-colors duration-300"
-             style="background: var(--cashm); color: var(--navy); margin-right: 1.5rem;"
-             onmouseover="this.style.background='var(--navy)'; this.style.color='var(--cream)'"
-             onmouseout="this.style.background='var(--cashm)'; this.style.color='var(--navy)'">
-            Aplicar →
-          </a>
         </div>
 
-        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr_auto] gap-4 md:gap-8 items-start md:items-center o6-reveal"
+        <!-- 03 -->
+        <div class="o6-offer-row border-t py-8 md:py-12 grid grid-cols-[48px_1fr] md:grid-cols-[80px_1fr] gap-4 md:gap-8 items-start o6-reveal"
              style="border-color: rgba(27,38,59,0.1);">
           <p class="text-3xl md:text-6xl"
-             style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.07); line-height: 1; font-weight: 700;">03</p>
+             style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.1); line-height: 1; font-weight: 700;">03</p>
           <div>
-            <h3 class="text-xl md:text-3xl mb-3 md:mb-4"
+            <h3 class="text-xl md:text-3xl mb-8"
                 style="font-family: 'Playfair Display', serif; color: var(--navy);">
-              Cambio de Hábitos de Alto Rendimiento
+              Material exclusivo de apoyo
             </h3>
-            <p class="leading-relaxed text-sm md:text-base" style="color: rgba(42,42,42,0.55);">
-              Sincronizamos la arquitectura mental con la emocional para consolidar una disciplina de alto impacto.
-            </p>
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center">
+                <span class="text-2xl font-bold min-w-[3rem] md:min-w-[5rem] text-right" 
+                      style="font-family: 'Playfair Display', serif; color: var(--navy);">—</span>
+                <span class="inline-block w-6 h-px bg-cashm/40 mx-4 flex-shrink-0"></span>
+                <span class="text-xs md:text-sm tracking-[0.2em] uppercase"
+                      style="color: rgba(42,42,42,0.65);">Adaptado a tu perfil, tu capital y tu forma de operar.</span>
+              </div>
+            </div>
           </div>
-          <a href="#contacto"
-             class="hidden md:block whitespace-nowrap text-xs tracking-[0.2em] uppercase px-6 py-4 transition-colors duration-300"
-             style="background: var(--cashm); color: var(--navy); margin-right: 1.5rem;"
-             onmouseover="this.style.background='var(--navy)'; this.style.color='var(--cream)'"
-             onmouseout="this.style.background='var(--cashm)'; this.style.color='var(--navy)'">
-            Aplicar →
-          </a>
         </div>
 
         <div class="border-t" style="border-color: rgba(27,38,59,0.1);"></div>
+
+        <!-- Closing callout — moved here from Sobre Mí -->
+        <p class="text-xs tracking-[0.25em] text-center uppercase font-bold mt-10" style="color: var(--navy);">
+          El trabajo no se corta cuando termina la sesión; el cambio se sostiene en el día a día.
+        </p>
 
       </div>
     </section>
@@ -569,78 +690,78 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="o6-sep mx-4 md:mx-20"
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
-    <!-- ── Sobre Mí + Resultados (Text Refined + Light Theme) ── -->
-    <section id="sobre-mi" class="relative py-16 md:py-32 px-6 md:px-20 overflow-hidden" style="background: var(--cream); color: var(--charcoal);">
-      <!-- Texture background with light overlay (Watermark protection) -->
+    <!-- ── Sobre Mí + Resultados ── -->
+    <section id="sobre-mi" class="relative overflow-hidden" style="background: var(--cream); color: var(--charcoal);">
+      <!-- Texture background -->
       <div class="absolute inset-0 z-0">
         <img src="/decorative-abstract.png" alt=""
              class="w-full h-full object-cover object-top opacity-20 scale-[1.15]"
              style="filter: grayscale(1) brightness(1.2);" />
       </div>
 
-      <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-
-        <!-- Left: bio -->
-        <div class="o6-sobre-left">
+      <!-- Grid A: Content Left, Portrait Right -->
+      <div class="relative z-10 grid md:grid-cols-2 min-h-[600px] md:min-h-[700px] items-stretch">
+        
+        <!-- Left Column: Padding and Bio -->
+        <div class="o6-sobre-left px-6 md:px-20 py-16 md:py-32 flex flex-col justify-center">
           <p class="text-xs tracking-[0.4em] uppercase mb-8 o6-contrast-heading">Sobre Mí</p>
-          <h2 class="text-4xl md:text-5xl lg:text-6xl leading-tight mb-8"
+          <h2 class="text-4xl md:text-5xl lg:text-7xl leading-tight mb-10"
               style="font-family: 'Playfair Display', serif; color: var(--navy); font-weight: 700;">
             Romina <br class="hidden lg:block"/> <em style="color: var(--navy); font-weight: 700; font-style: normal;">Gaudiano.</em>
           </h2>
+
           <p class="leading-loose text-lg mb-8" style="color: rgba(42,42,42,0.85);">
             Diplomada en Neurociencias, Neurocoach y especialista en reprogramación de la mente subconsciente, con más de 4500 procesos de transformación real.
           </p>
           
-          <div class="mb-12 space-y-8">
-            <blockquote class="pl-6 leading-loose italic text-xl"
+          <div class="mb-0">
+            <blockquote class="pl-6 leading-loose italic text-center text-xl md:text-left md:text-2xl"
                         style="border-left: 2px solid var(--cashm); color: var(--navy); font-family: 'Playfair Display', serif;">
               "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él."
             </blockquote>
-            
-            <p class="text-xs tracking-[0.25em] uppercase font-bold" style="color: var(--navy);">
-              El trabajo no se corta cuando termina la sesión; el cambio se sostiene en el día a día.
-            </p>
           </div>
         </div>
 
-        <!-- Right: resultados grid -->
-        <div class="o6-sobre-right">
-          <p class="text-xs tracking-[0.4em] uppercase mb-8" style="color: var(--navy);">
-            Resultados que buscan quienes eligen esta mentoría
-          </p>
-          <div class="grid grid-cols-2 gap-3">
-            {[
-              "Mayor estabilidad emocional",
-              "Decisiones más conscientes",
-              "Hábitos mentales sólidos",
-              "Menor reactividad",
-              "Protección del capital",
-              "Confianza interna sostenida"
-            ].map(r => (
-              <div class="o6-resultado-box p-5 md:p-6 bg-white/50 backdrop-blur-sm group border-navy/5">
-                <style>
-                  .o6-resultado-box:hover {
-                    background: var(--navy) !important;
-                    color: var(--cream) !important;
-                  }
-                  .o6-resultado-box:hover .o6-resultado-text {
-                    color: var(--cashm) !important;
-                  }
-                  .o6-resultado-box:hover .o6-resultado-line {
-                    background: var(--cashm) !important;
-                    opacity: 1 !important;
-                  }
-                </style>
-                <div class="o6-resultado-line w-4 h-px mb-4" style="background: var(--navy); opacity: 0.15;"></div>
-                <p class="o6-resultado-text text-sm md:text-base transition-colors duration-350"
-                   style="font-family: 'Playfair Display', serif; color: var(--charcoal);">{r}</p>
-              </div>
-            ))}
-          </div>
+        <!-- Right Column: Full Bleed Portrait -->
+        <div class="relative h-80 md:h-auto block overflow-hidden order-first md:order-none">
+          <img src="/gaudiano2.jpg" alt="Romina Gaudiano"
+               class="absolute inset-0 w-full h-full object-cover object-top" />
+          <div class="absolute inset-0"
+               style="background: linear-gradient(to left, var(--cream), transparent 40%);"></div>
         </div>
 
       </div>
+
+      <!-- Part B: outcomes full grid below -->
+      <div class="relative z-10 px-6 md:px-20 pb-24 md:pb-36">
+        <p class="text-xs tracking-[0.4em] uppercase mb-12 mt-0 text-center md:mt-12" style="color: var(--navy);">
+          Resultados que buscan quienes eligen esta mentoría
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          {[
+            "Mayor estabilidad emocional",
+            "Decisiones más conscientes",
+            "Hábitos mentales sólidos",
+            "Menor reactividad",
+            "Protección del capital",
+            "Confianza interna sostenida"
+          ].map(r => (
+            <div class="o6-resultado-box p-6 md:p-8 bg-white/40 backdrop-blur-sm group border-navy/5">
+              <style>
+                .o6-resultado-box:hover { background: var(--navy) !important; }
+                .o6-resultado-box:hover .o6-resultado-text { color: var(--cashm) !important; }
+                .o6-resultado-box:hover .o6-resultado-line { background: var(--cashm) !important; opacity: 1 !important; width: 2rem !important; }
+              </style>
+              <div class="o6-resultado-line w-4 h-px mb-6 transition-all duration-350" 
+                   style="background: var(--navy); opacity: 0.15;"></div>
+              <p class="o6-resultado-text text-base md:text-lg transition-colors duration-350"
+                 style="font-family: 'Playfair Display', serif; color: var(--charcoal);">{r}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
+
 
     <div class="o6-sep mx-4 md:mx-20"
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
@@ -650,7 +771,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <!-- Background Image with Overlay (Directly related to traders) -->
       <div class="absolute inset-0 z-0 scale-[1.05]">
         <img src="/trading_graphs_bg.png" alt="" class="w-full h-full object-cover blur-[2px]" />
-        <div class="absolute inset-0 bg-[#2A2A2A]/90 backdrop-blur-[2px]"></div>
+        <div class="absolute inset-0 bg-[#2A2A2A]/80 backdrop-blur-[2px]"></div>
       </div>
 
       <div class="relative z-10 max-w-4xl mx-auto o6-reveal">
@@ -672,7 +793,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
            onmouseout="this.style.background='var(--cashm)'; this.style.color='var(--navy)'">
           Aplicá Acá
         </a>
-        <p class="mt-8 text-xs italic" style="color: rgba(245,242,235,0.3);">Respondemos en menos de 24 hs.</p>
       </div>
     </section>
 
@@ -690,14 +810,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <div class="flex flex-col items-center gap-3">
         <span class="text-[9px] tracking-[0.3em] uppercase opacity-30">Desarrollado por</span>
-        <div class="h-6 opacity-40 hover:opacity-80 transition-opacity duration-500 cursor-pointer">
+        <a href="https://www.instagram.com/numa.digital/" target="_blank" rel="noopener noreferrer" class="h-6 opacity-40 hover:opacity-80 transition-opacity duration-500">
           <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 208.66" class="h-full w-auto" style="fill: var(--cream); opacity: 0.7;">
             <path d="M501.3,164.68c-.17.03-1.26.21-1.99.33-17.94,2.97-16.12-19.43-16.29-19.18s.63-116.2.63-116.2l-31.17-.11-.11,62.38s.95,27.12-2.65,46.27-32.61,31.67-57.83,26.93c-25.22-4.74-26.52-23.21-27.44-33.12s-.92-102.48-.92-102.48h-31.25s.99,100.41,0,104.55-3.6,9.34-12.95,16.16c-9.34,6.81-11.77.63-11.95-2.47s2.73-41.25,4.55-57.63c1.82-16.38,2.43-23.05,0-32.46-2.43-9.4-4.55-17.59-15.77-26.39-11.22-8.8-23.91-8.55-34.28-3.03s-14.97,12.14-28.51,30.94-39.88,75.84-41.28,78.36-2.33.47-2.33.47c0,0,.43-78.2,0-89.74s-7.01-23.37-20.46-23.93-20.77,13.65-20.77,13.65l-26.3,50.02,22.16,13.75s11.75-19.54,14.39-24.81c2.64-5.28,2.64-1.48,2.64-1.48,0,0-1.35,83.91,2.47,99.6,3.83,15.69,15.78,16.46,20.57,15.69,4.78-.78,13.71-4.19,22.59-20.9,4.7-8.85,22.39-42.11,22.39-42.11,0,0,31.42-66.41,42.54-67.61s11.35,16.61,10.39,23.91-9.27,68.79-8.06,83.41c1.22,14.62,9.17,25.88,29.57,22.23,20.4-3.65,30.41-50.55,31.02-43.24.61,7.31,5.99,16.51,13.09,25.58,7.11,9.07,22.1,17.09,34.8,18.08,12.71.99,27.69,1.84,43.57-5.28s29.21-32.84,29.21-32.84c0,0,.99,18.81,4.29,25.25s6.93,10.73,23.76,11.22c16.83.5,17.81-1.89,17.81-3.71v-19.24c0-.27.02-.82-.15-.8Z"/>
             <path d="M503.04,29.03l.88,157.51h31.5s-.43-82.14.04-93.51c.47-11.37,3.5-32.56,23.8-41.69,20.29-9.13,39.85-1.38,45.2,5.44,5.35,6.83,11.25,10.15,11.44,33.94.18,23.8.07,95.81.07,95.81h30.37s-.83-85.69,1-96.48c1.83-10.79,5.15-28.87,27.51-39.82s40.16,4.03,45.73,11.81c5.57,7.78,6.92,12.82,7.09,24.47s-.22,100.02-.22,100.02h31.61s0-95.97,0-107.45-3.88-29.58-16.03-39.82c-12.15-10.24-25.65-15.7-39.15-15.7s-31.56,2.37-43.71,14.69c-12.15,12.32-16.71,22.78-16.71,22.78,0,0-.34,2.53-3.04-4.05s-9.45-22.95-30.37-30.54c-20.92-7.59-45.62,1.94-49.15,3.49s-19.65,13.36-25.18,26.17c-5.52,12.81-5.42-2.33-5.42-2.33v-24.74h-27.25Z"/>
             <path d="M926.68,164.74c-8.73,1.72-10.34,1.27-13.47-.9-5.17-3.58-5.06-10.53-4.98-12.31.12-2.86.8-46.98-1.07-75.09s-11.94-34.25-21.21-40.43c-9.26-6.18-59.37-19.53-88.29-4.81-28.91,14.72-29.84,41.35-29.84,41.35,0,0,27.15,3.16,27.92,3.94-.07-.68.74-7.82,3.95-13.55,2.72-4.85,7.41-7.86,7.41-7.86,0,0,23.18-18.28,50.27-6.7,27.09,11.58,22.26,32.2,10.05,40.09s-51.8,9.65-70.71,13.9c-18.91,4.25-30.27,17.02-33.47,33.85s5.1,33.01,11.52,39.68c11.39,12.94,31.6,14.98,45.99,14.98s25.96-2.75,37.52-10.09,20.69-25.67,20.69-25.67c0,0,1.5-.94,1.69,2.26.19,3.2,1.32,13.92,4.8,19.94,3.48,6.02,7.14,9.88,19.09,11.1s22.87-1.86,22.87-1.86l-.71-21.8ZM873.45,136.91c-1.5,6.12-2.62,26.04-32.72,30.95-30.1,4.91-48.37-2.28-49.3-19.09-.93-16.81,6.75-25.02,16.41-29.12s37.96-8.29,48.32-10.85c10.36-2.56,18.86-6.43,18.86-6.43,0,0-.08,28.43-1.58,34.55Z"/>
             <circle cx="948.07" cy="168.45" r="19.23"/>
           </svg>
-        </div>
+        </a>
       </div>
     </footer>
 
@@ -710,34 +830,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       const ring = document.getElementById('o6-cursor-ring') as HTMLElement;
 
       if (dot && ring) {
-        let mx = -100, my = -100;   // mouse position
-        let rx = -100, ry = -100;   // ring position (lerped)
-
-        // Dot follows mouse instantly
+        // Dot and Ring follow mouse instantly (no lag)
         document.addEventListener('mousemove', e => {
-          mx = e.clientX; my = e.clientY;
+          const mx = e.clientX; 
+          const my = e.clientY;
+          
           dot.style.left = mx + 'px';
           dot.style.top  = my + 'px';
+          
+          ring.style.left = mx + 'px';
+          ring.style.top  = my + 'px';
         }, { passive: true });
 
-        // Ring follows with lerp
-        const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-        const tick = () => {
-          rx = lerp(rx, mx, 0.1);
-          ry = lerp(ry, my, 0.1);
-          ring.style.left = rx + 'px';
-          ring.style.top  = ry + 'px';
-          requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-
         // Hover state on interactables
-        document.querySelectorAll('a, button').forEach(el => {
+        document.querySelectorAll('a, button, label').forEach(el => {
           el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
           el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
         });
       }
     }
+
+    // ── Menu auto-close on link click ───────────────────────
+    const menuToggle = document.getElementById('o6-menu-toggle') as HTMLInputElement;
+    const menuLinks  = document.querySelectorAll('.o6-menu-link');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (menuToggle) menuToggle.checked = false;
+      });
+    });
 
     // ── Counter animation (option 3) ────────────────────────
     const counters = document.querySelectorAll('[data-count]');
