@@ -582,25 +582,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p class="text-3xl md:text-6xl"
              style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.1); line-height: 1; font-weight: 700;">02</p>
           <div>
-            <h3 class="text-xl md:text-3xl mb-8"
+            <h3 class="text-xl md:text-3xl mb-4 md:mb-8"
                 style="font-family: 'Playfair Display', serif; color: var(--navy);">
               Acompañamiento entre sesiones
             </h3>
-            <div class="flex flex-col gap-4">
-              {[
-                "Seguimiento entre encuentros",
-                "Acompañamiento en momentos críticos",
-                "Ajustes personalizados según tu realidad operativa"
-              ].map(sub => (
-                <div class="flex items-center">
-                  <span class="text-2xl font-bold min-w-[3rem] md:min-w-[5rem] text-right" 
-                        style="font-family: 'Playfair Display', serif; color: var(--navy);">—</span>
-                  <span class="inline-block w-6 h-px bg-cashm/40 mx-4 flex-shrink-0"></span>
-                  <span class="text-xs md:text-sm tracking-[0.2em] uppercase"
-                        style="color: rgba(42,42,42,0.65);">{sub}</span>
-                </div>
-              ))}
-            </div>
+            <p class="text-base md:text-lg italic leading-relaxed"
+               style="font-family: 'Lora', serif; color: rgba(42,42,42,0.65);">
+              Seguimiento entre encuentros · Acompañamiento en momentos críticos · Ajustes personalizados según tu realidad operativa
+            </p>
           </div>
         </div>
 
@@ -610,19 +599,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <p class="text-3xl md:text-6xl"
              style="font-family: 'Playfair Display', serif; color: rgba(27,38,59,0.1); line-height: 1; font-weight: 700;">03</p>
           <div>
-            <h3 class="text-xl md:text-3xl mb-8"
+            <h3 class="text-xl md:text-3xl mb-4 md:mb-8"
                 style="font-family: 'Playfair Display', serif; color: var(--navy);">
               Material exclusivo de apoyo
             </h3>
-            <div class="flex flex-col gap-4">
-              <div class="flex items-center">
-                <span class="text-2xl font-bold min-w-[3rem] md:min-w-[5rem] text-right" 
-                      style="font-family: 'Playfair Display', serif; color: var(--navy);">—</span>
-                <span class="inline-block w-6 h-px bg-cashm/40 mx-4 flex-shrink-0"></span>
-                <span class="text-xs md:text-sm tracking-[0.2em] uppercase"
-                      style="color: rgba(42,42,42,0.65);">Adaptado a tu perfil, tu capital y tu forma de operar.</span>
-              </div>
-            </div>
+            <p class="text-base md:text-lg italic leading-relaxed"
+               style="font-family: 'Lora', serif; color: rgba(42,42,42,0.65);">
+              Adaptado a tu perfil, tu capital y tu forma de operar.
+            </p>
           </div>
         </div>
 
@@ -710,14 +694,21 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Romina <br class="hidden lg:block"/> <em style="color: var(--navy); font-weight: 700; font-style: normal;">Gaudiano.</em>
           </h2>
 
-          <p class="leading-loose text-lg mb-8" style="color: rgba(42,42,42,0.85);">
+          <p class="leading-loose text-lg mb-8 w-full" style="color: rgba(42,42,42,0.85);">
             Diplomada en Neurociencias, Neurocoach y especialista en reprogramación de la mente subconsciente, con más de 4500 procesos de transformación real.
           </p>
           
           <div class="mb-0">
-            <blockquote class="pl-6 leading-loose italic text-center text-xl md:text-left md:text-2xl"
-                        style="border-left: 2px solid var(--cashm); color: var(--navy); font-family: 'Playfair Display', serif;">
-              "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él."
+            <!-- Mobile: no border/indent (looks offset). Desktop: classic blockquote treatment. -->
+            <blockquote class="leading-loose italic text-center text-xl md:text-left md:text-2xl md:pl-6"
+                        style="color: var(--navy); font-family: 'Playfair Display', serif;"
+                        >
+              <span class="hidden md:inline" style="border-left: 2px solid var(--cashm); padding-left: 1.5rem; display: block;">
+                "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él."
+              </span>
+              <span class="md:hidden">
+                "Trabajo con personas que entienden que el verdadero activo no es el mercado, sino la mente que decide dentro de él."
+              </span>
             </blockquote>
           </div>
         </div>
