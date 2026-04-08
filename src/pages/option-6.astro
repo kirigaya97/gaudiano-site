@@ -546,6 +546,57 @@ import BaseLayout from "../layouts/BaseLayout.astro";
          style="border-top: 1px solid rgba(245,242,235,0.08);"></div>
 
 
+    <!-- ── Pilares (Dynamic Hover Section) ── -->
+    <section id="o6-pilares" class="py-16 md:py-32 px-6 md:px-20 overflow-hidden">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16 o6-reveal">
+          <p class="text-xs tracking-[0.4em] uppercase mb-4" style="color: var(--cashm);">Cómo se trabaja</p>
+          <h2 style="font-family: 'Playfair Display', serif; line-height: 1; display: flex; align-items: baseline; justify-content: center; gap: 0.3em;">
+            <span style="font-size: clamp(3rem, 8vw, 7rem); font-weight: 700; line-height: 1;">3</span>
+            <em style="font-size: clamp(2rem, 4vw, 3.5rem); opacity: 0.6;">Pilares.</em>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 relative">
+          <div id="o6-pilares-line" class="hidden md:block absolute top-12 left-[8%] right-[8%] h-px"></div>
+
+          {[
+            {
+              step: "01",
+              title: "Reprogramación Mental Subconsciente",
+              desc: "No analizamos el síntoma. Reprogramamos el patrón que lo genera y lo cambiamos de raíz."
+            },
+            {
+              step: "02",
+              title: "Neurociencias Aplicadas a la Regulación Emocional",
+              desc: "Prácticas para dominar la biología del enfoque con el objetivo de lograr estabilidad emocional bajo presión."
+            },
+            {
+              step: "03",
+              title: "Cambio de Hábitos de Alto Rendimiento",
+              desc: "Sincronizamos la arquitectura mental con la emocional para consolidar una disciplina de alto impacto."
+            }
+          ].map(item => (
+            <div class="o6-pilar-card o6-reveal flex flex-col items-center text-center transition-all duration-300">
+              <div class="o6-pilar-circle w-24 h-24 rounded-full border flex items-center justify-center mb-8 transition-all duration-500"
+                   style="border-color: rgba(215,201,180,0.22); font-family: 'Playfair Display', serif; font-size: 1.5rem;">
+                {item.step}
+              </div>
+              <h3 class="text-xl md:text-2xl mb-4 leading-snug px-2"
+                  style="font-family: 'Playfair Display', serif;">
+                {item.title}
+              </h3>
+              <p class="o6-pilar-desc text-sm leading-loose max-w-xs opacity-70">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
     <!-- ── Protocolo (option 3 hover rows + Playfair + opt-4 palette) ── -->
     <section id="protocolo" class="py-16 md:py-32 px-6 md:px-20"
              style="background: var(--cream); color: var(--charcoal);">
@@ -616,57 +667,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p class="text-xs tracking-[0.25em] text-center uppercase font-bold mt-10" style="color: var(--navy);">
           El trabajo no se corta cuando termina la sesión; el cambio se sostiene en el día a día.
         </p>
-
-      </div>
-    </section>
-
-    <!-- ── Pilares (Dynamic Hover Section) ── -->
-    <section id="o6-pilares" class="py-16 md:py-32 px-6 md:px-20 overflow-hidden">
-      <div class="max-w-5xl mx-auto">
-
-        <div class="text-center mb-16 o6-reveal">
-          <p class="text-xs tracking-[0.4em] uppercase mb-4" style="color: var(--cashm);">Cómo se trabaja</p>
-          <h2 style="font-family: 'Playfair Display', serif; line-height: 1; display: flex; align-items: baseline; justify-content: center; gap: 0.3em;">
-            <span style="font-size: clamp(3rem, 8vw, 7rem); font-weight: 700; line-height: 1;">3</span>
-            <em style="font-size: clamp(2rem, 4vw, 3.5rem); opacity: 0.6;">Pilares.</em>
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 relative">
-          <div id="o6-pilares-line" class="hidden md:block absolute top-12 left-[8%] right-[8%] h-px"></div>
-
-          {[
-            {
-              step: "01",
-              title: "Reprogramación Mental Subconsciente",
-              desc: "No analizamos el síntoma. Reprogramamos el patrón que lo genera y lo cambiamos de raíz."
-            },
-            {
-              step: "02",
-              title: "Neurociencias Aplicadas a la Regulación Emocional",
-              desc: "Prácticas para dominar la biología del enfoque con el objetivo de lograr estabilidad emocional bajo presión."
-            },
-            {
-              step: "03",
-              title: "Cambio de Hábitos de Alto Rendimiento",
-              desc: "Sincronizamos la arquitectura mental con la emocional para consolidar una disciplina de alto impacto."
-            }
-          ].map(item => (
-            <div class="o6-pilar-card o6-reveal flex flex-col items-center text-center transition-all duration-300">
-              <div class="o6-pilar-circle w-24 h-24 rounded-full border flex items-center justify-center mb-8 transition-all duration-500"
-                   style="border-color: rgba(215,201,180,0.22); font-family: 'Playfair Display', serif; font-size: 1.5rem;">
-                {item.step}
-              </div>
-              <h3 class="text-xl md:text-2xl mb-4 leading-snug px-2"
-                  style="font-family: 'Playfair Display', serif;">
-                {item.title}
-              </h3>
-              <p class="o6-pilar-desc text-sm leading-loose max-w-xs opacity-70">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
 
       </div>
     </section>
