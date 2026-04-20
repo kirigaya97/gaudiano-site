@@ -447,13 +447,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-24 items-center">
 
-        <!-- Left: Image (option 4 "El Desafío" overlay style — no frame) -->
-        <div class="relative">
-          <div class="overflow-hidden aspect-[4/3] relative shadow-xl">
-            <img src="/impacto-trading.webp" alt="Mentalidad en el trading"
-                 class="w-full h-full object-cover" />
-            <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none"
-                 style="background: rgba(27,38,59,0.10);"></div>
+        <!-- Left: Image — option 4 horizontal triptych -->
+        <div class="relative p-2 rounded-sm shadow-xl" style="background: rgba(215,201,180,0.5);">
+          <div class="w-full h-[450px] md:h-[550px] flex flex-col gap-2 overflow-hidden rounded-sm border border-white/50"
+               style="background: rgba(215,201,180,0.5);">
+
+            <!-- Top slice -->
+            <div class="w-full flex-1 relative overflow-hidden group cursor-default">
+              <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none transition-opacity duration-1000 group-hover:opacity-70"
+                   style="background: linear-gradient(to top, rgba(27,38,59,0.20), transparent);"></div>
+              <img src="/impacto-trading.webp" alt="Mentalidad en el trading — superior"
+                   class="w-full object-cover object-[center_top] grayscale opacity-90 h-[300%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-[80%] group-hover:opacity-100" />
+            </div>
+
+            <!-- Middle slice -->
+            <div class="w-full flex-1 relative overflow-hidden group cursor-default">
+              <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none transition-opacity duration-1000 group-hover:opacity-50"
+                   style="background: rgba(27,38,59,0.10);"></div>
+              <img src="/impacto-trading.webp" alt="Mentalidad en el trading — central"
+                   class="w-full object-cover object-[center_center] grayscale opacity-90 h-[300%] -translate-y-[33%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-[80%] group-hover:opacity-100" />
+            </div>
+
+            <!-- Bottom slice -->
+            <div class="w-full flex-1 relative overflow-hidden group cursor-default">
+              <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none transition-opacity duration-1000 group-hover:opacity-70"
+                   style="background: linear-gradient(to bottom, rgba(27,38,59,0.20), transparent);"></div>
+              <img src="/impacto-trading.webp" alt="Mentalidad en el trading — inferior"
+                   class="w-full object-cover object-[center_bottom] grayscale opacity-90 h-[300%] -translate-y-[66%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-[80%] group-hover:opacity-100" />
+            </div>
+
           </div>
         </div>
 
