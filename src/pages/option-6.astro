@@ -743,10 +743,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         <!-- Right: Inserted portrait (not full bleed) -->
         <div class="o6-sobre-right flex justify-center md:justify-end">
-          <div class="relative w-full max-w-sm md:max-w-md aspect-[4/5] overflow-hidden"
+          <div class="group relative w-full max-w-sm md:max-w-md aspect-[4/5] overflow-hidden"
                style="border-radius: 2%; box-shadow: 0 14px 42px rgba(27,38,59,0.22);">
             <img src="/gaudiano2.webp" alt="Romina Gaudiano"
-                 class="absolute inset-0 w-full h-full object-cover object-top" />
+                 class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-105" />
           </div>
         </div>
 
