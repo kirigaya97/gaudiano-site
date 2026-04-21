@@ -495,7 +495,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 
     <!-- ── New "Impacto" Section ──────────────────────────── -->
-    <section class="relative py-16 md:py-32 px-6 md:px-20 o6-reveal overflow-hidden" style="background: var(--cashm); color: var(--navy);">
+    <section class="relative py-16 md:py-32 px-6 md:px-20 o6-reveal overflow-hidden" style="background: var(--cream); color: var(--navy);">
 
       <div class="relative z-10 max-w-6xl mx-auto grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-24 items-center">
 
@@ -506,26 +506,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
             <!-- Top slice -->
             <div class="w-full flex-1 relative overflow-hidden group cursor-default">
-              <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none transition-opacity duration-1000 group-hover:opacity-70"
-                   style="background: linear-gradient(to top, rgba(27,38,59,0.20), transparent);"></div>
               <img src="/impacto-trading.webp" alt="Mentalidad en el trading — superior"
-                   class="w-full object-cover object-[center_top] grayscale opacity-90 h-[300%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-[80%] group-hover:opacity-100" />
+                   class="w-full object-cover object-[center_top] h-[300%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
             </div>
 
             <!-- Middle slice -->
             <div class="w-full flex-1 relative overflow-hidden group cursor-default">
-              <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none transition-opacity duration-1000 group-hover:opacity-50"
-                   style="background: rgba(27,38,59,0.10);"></div>
               <img src="/impacto-trading.webp" alt="Mentalidad en el trading — central"
-                   class="w-full object-cover object-[center_center] grayscale opacity-90 h-[300%] -translate-y-[33%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-[80%] group-hover:opacity-100" />
+                   class="w-full object-cover object-[center_center] h-[300%] -translate-y-[33%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
             </div>
 
             <!-- Bottom slice -->
             <div class="w-full flex-1 relative overflow-hidden group cursor-default">
-              <div class="absolute inset-0 z-10 mix-blend-multiply pointer-events-none transition-opacity duration-1000 group-hover:opacity-70"
-                   style="background: linear-gradient(to bottom, rgba(27,38,59,0.20), transparent);"></div>
               <img src="/impacto-trading.webp" alt="Mentalidad en el trading — inferior"
-                   class="w-full object-cover object-[center_bottom] grayscale opacity-90 h-[300%] -translate-y-[66%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale-[80%] group-hover:opacity-100" />
+                   class="w-full object-cover object-[center_bottom] h-[300%] -translate-y-[66%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
             </div>
 
           </div>
@@ -681,7 +675,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <p class="text-xs tracking-[0.4em] uppercase mb-4 o6-contrast-heading">Metodología</p>
               <h2 class="text-4xl md:text-5xl leading-tight mb-10"
                   style="font-family: 'Playfair Display', serif; color: var(--navy); font-weight: 700;">
-                Formato de la <em style="color: var(--cashm);">Mentoría.</em>
+                Formato de la <em>Mentoría.</em>
               </h2>
 
               <div class="flex flex-col gap-6">
@@ -786,7 +780,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <!-- Section summary — centered closing callout -->
         <p class="o6-reveal mt-16 md:mt-24 text-center italic text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed"
            style="font-family: 'Playfair Display', serif; color: var(--navy);">
-          "Acompañamiento real + proceso sostenido + valor entre sesiones."
+          Acompañamiento real + proceso sostenido + valor entre sesiones.
         </p>
 
       </div>
@@ -830,7 +824,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </div>
 
       <!-- Resultados rectangles (restored from main branch) -->
-      <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-20 pb-24 md:pb-32">
+      <!-- <div class="relative z-10 max-w-6xl mx-auto px-6 md:px-20 pb-24 md:pb-32">
         <p class="text-xs tracking-[0.4em] uppercase mb-12 text-center" style="color: var(--navy);">
           Resultados que buscan quienes eligen esta mentoría
         </p>
@@ -856,7 +850,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </div>
           ))}
         </div>
-      </div>
+    </div> -->
     </section>
 
 
@@ -881,7 +875,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <em style="color: var(--cashm);">Decisiones limpias.</em>
         </h2>
         <p class="max-w-lg mx-auto mb-10 text-lg leading-relaxed" style="color: rgba(245,242,235,0.65);">
-          Hábitos mentales sólidos para proteger tu capital. <strong>Contactate</strong> ahora para reservar tu lugar.
+          Hábitos mentales sólidos para proteger tu capital. Contactate ahora para reservar tu lugar.
         </p>
         <p class="text-sm md:text-base tracking-[0.3em] uppercase mb-10"
            style="color: var(--cashm); font-family: 'Playfair Display', serif;">
@@ -911,13 +905,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <input type="text" name="name" required autocomplete="name" />
             </label>
             <label class="o6-field">
-              <span>Email</span>
+              <span>Mail</span>
               <input type="email" name="email" required autocomplete="email" />
             </label>
           </div>
 
           <label class="o6-field">
-            <span>Contame brevemente en qué estás</span>
+            <span>Teléfono</span>
+            <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
+          </label>
+
+          <label class="o6-field">
+            <span>Dejame tu comentario</span>
             <textarea name="message" rows="4" required></textarea>
           </label>
 
