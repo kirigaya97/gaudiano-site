@@ -70,11 +70,9 @@ Once chosen, update:
 - `aria-label="Contactar por WhatsApp"`, opens in new tab.
 - Prefilled message: *"Hola Romina, me gustaría saber más sobre la mentoría."*
 
-### TODO — real phone number
+### Phone number
 
-Placeholder URL: `https://wa.me/549XXXXXXXXXX?text=...`
-
-Replace `549XXXXXXXXXX` with Romina's real WhatsApp in international format (no `+`, no spaces, no dashes). Example for an AR mobile `11-5555-5555`: `5491155555555`.
+Live URL: `https://wa.me/5491154697343?text=...` (Romina's AR mobile +54 9 11 5469-7343).
 
 ---
 
@@ -101,7 +99,6 @@ npm run preview
 ## Open TODOs (summary)
 
 - [ ] Decide mailing provider and wire `<form action>` + server-side honeypot check.
-- [ ] Replace WhatsApp placeholder number `549XXXXXXXXXX` with Romina's real number.
 - [ ] Pick final landing option (likely option-6) and remove/archive the others.
 - [ ] Pick hosting target; add deploy workflow.
 - [ ] Add `favicon` / social-share meta (`og:image`, `twitter:card`) before launch.
