@@ -2,32 +2,26 @@
 
 Living snapshot of the project. Update this file whenever a significant decision, integration, or TODO changes. See `CLAUDE.md` for brand/aesthetic context and workflow.
 
-**Last updated:** 2026-04-20
+**Last updated:** 2026-04-24
 
 ---
 
 ## Current direction
 
-- **Option 6 (`src/pages/option-6.astro`)** is the lead candidate — all recent refinements land here.
-- Options 1, 2, 3, 5 are preserved as historical comparisons and linked from `index.astro`.
-- No option has been formally selected/retired yet.
+- **Option 6 is the chosen direction** and has been promoted to the sole landing at `/` (`src/pages/index.astro`).
+- Previous options (1, 2, 3, 5) and the selector index are preserved on branch `archive/pre-option-6-cleanup` on the remote.
 
 ## Pages
 
 | Route | File | Status |
 |---|---|---|
-| `/` | `src/pages/index.astro` | Selector / index of options |
-| `/option-1` | `option-1.astro` | Editorial / Old Money — original draft, frozen |
-| `/option-2` | `option-2.astro` | Warm Minimalist — original draft, frozen |
-| `/option-3` | `option-3.astro` | Strategic / Modern Authority — original draft, frozen |
-| `/option-5` | `option-5.astro` | Client fusion — frozen |
-| `/option-6` | `option-6.astro` | **Active refinement track** |
+| `/` | `src/pages/index.astro` | The landing (formerly `option-6.astro`) |
 
 ---
 
-## Contact form (option-6 only)
+## Contact form
 
-Located in the `#contacto` section at the bottom of `option-6.astro`.
+Located in the `#contacto` section at the bottom of `index.astro`.
 
 ### Fields
 
@@ -35,6 +29,7 @@ Located in the `#contacto` section at the bottom of `option-6.astro`.
 |---|---|---|---|
 | `name`    | text      | yes | `autocomplete="name"` |
 | `email`   | email     | yes | `autocomplete="email"` |
+| `phone`   | tel       | no  | `autocomplete="tel"` |
 | `message` | textarea  | yes | 4 rows, vertically resizable |
 | `website` | text (honeypot) | no | Hidden off-screen; if non-empty at submit, submission is silently dropped |
 
@@ -57,14 +52,14 @@ Likely options (pick one):
 - **Custom SMTP endpoint** on Hostinger (PHP mail handler). Only if the site is eventually hosted on Hostinger shared hosting.
 
 Once chosen, update:
-1. `<form action="...">` in `option-6.astro`.
+1. `<form action="...">` in `index.astro`.
 2. The submit handler — either remove `preventDefault` and let the form POST natively, or `fetch()` the endpoint and keep the status-message flow.
 3. Remove the TODO comment block above the form.
 4. Verify the honeypot is checked **server-side too** (client-side alone is insufficient).
 
 ---
 
-## WhatsApp floating button (option-6 only)
+## WhatsApp floating button
 
 - Fixed bottom-right, brand-green circle, SVG icon.
 - `aria-label="Contactar por WhatsApp"`, opens in new tab.
@@ -99,6 +94,6 @@ npm run preview
 ## Open TODOs (summary)
 
 - [ ] Decide mailing provider and wire `<form action>` + server-side honeypot check.
-- [ ] Pick final landing option (likely option-6) and remove/archive the others.
 - [ ] Pick hosting target; add deploy workflow.
 - [ ] Add `favicon` / social-share meta (`og:image`, `twitter:card`) before launch.
+- [ ] Optional: rename the top-of-file comment block in `index.astro` (still references "Option 6 — Fusion + Customer Modifications" and compares to options 3/4/5).
