@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
-// TODO: replace with the real domain once decided.
-const SITE = 'https://rominagaudiano.com';
+const SITE = 'https://mentoria.rominagaudiano.com';
 
 // https://astro.build/config
 export default defineConfig({
