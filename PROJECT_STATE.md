@@ -8,20 +8,21 @@ Living snapshot of the project. Update this file whenever a significant decision
 
 ## Current direction
 
-- **Option 6 is the chosen direction** and has been promoted to the sole landing at `/` (`src/pages/index.astro`).
+- **Option 6** was chosen and promoted to the sole landing at `/` (`src/pages/index.astro`).
 - Previous options (1, 2, 3, 5) and the selector index are preserved on branch `archive/pre-option-6-cleanup` on the remote.
 
 ## Pages
 
 | Route | File | Status |
 |---|---|---|
-| `/` | `src/pages/index.astro` | The landing (formerly `option-6.astro`) |
+| `/` | `src/pages/index.astro` | Landing |
+| `POST /api/contact` | `src/pages/api/contact.ts` | Serverless endpoint (Resend) |
 
 ---
 
 ## Contact form
 
-Located in the `#contacto` section at the bottom of `index.astro`.
+Posts JSON to `POST /api/contact` (Vercel serverless function) which validates input, re-checks the honeypot server-side, and sends via Resend.
 
 ### Fields
 
@@ -29,33 +30,26 @@ Located in the `#contacto` section at the bottom of `index.astro`.
 |---|---|---|---|
 | `name`    | text      | yes | `autocomplete="name"` |
 | `email`   | email     | yes | `autocomplete="email"` |
-| `phone`   | tel       | no  | `autocomplete="tel"` |
+| `phone`   | tel       | yes (client) / optional (server) | `autocomplete="tel"` |
 | `message` | textarea  | yes | 4 rows, vertically resizable |
-| `website` | text (honeypot) | no | Hidden off-screen; if non-empty at submit, submission is silently dropped |
+| `website` | text (honeypot) | no | Hidden off-screen; filled → server returns `{ ok: true }` without sending |
 
-### Current behaviour
+### Required env vars (Vercel → Settings → Environment Variables)
 
-- `action=""` is **empty on purpose** — no mailing provider wired yet.
-- A JS handler in the page script:
-  1. `preventDefault()` on submit.
-  2. Checks the honeypot; if filled → resets form, shows "Gracias, te escribo pronto.", returns.
-  3. Runs `checkValidity()` / `reportValidity()`.
-  4. Disables the submit button, shows the same confirmation, resets the form.
-- **No data is currently sent anywhere.** Users get a success-looking UX; nothing reaches Romina's inbox.
+See `.env.example`. All three must be set for the endpoint to succeed:
 
-### TODO — wire a real mailing provider
+- `RESEND_API_KEY` — Resend API key.
+- `CONTACT_TO_EMAIL` — inbox that receives consultas (e.g. `romina@rominagaudiano.com`).
+- `CONTACT_FROM_EMAIL` — verified sender (requires a domain verified in Resend).
 
-Likely options (pick one):
+If any is missing, the endpoint returns `500` with `"Servicio de correo no configurado."`.
 
-- **Formspree** — set `action="https://formspree.io/f/<id>"`, `method="POST"`, remove the JS `preventDefault` or switch to `fetch()` with JSON. Pros: no backend. Cons: branding/limits on free tier.
-- **Resend** (or similar transactional email) via a tiny serverless function (Vercel/Netlify/Cloudflare Worker). Pros: full control over from/to, no third-party form branding. Cons: needs a deployment target with functions — current site is pure static Astro.
-- **Custom SMTP endpoint** on Hostinger (PHP mail handler). Only if the site is eventually hosted on Hostinger shared hosting.
+### Pre-launch TODOs for the form
 
-Once chosen, update:
-1. `<form action="...">` in `index.astro`.
-2. The submit handler — either remove `preventDefault` and let the form POST natively, or `fetch()` the endpoint and keep the status-message flow.
-3. Remove the TODO comment block above the form.
-4. Verify the honeypot is checked **server-side too** (client-side alone is insufficient).
+- [ ] Sign up for Resend and verify the sending domain.
+- [ ] Set `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` in Vercel.
+- [ ] Test end-to-end from a deployed preview URL (local dev can't hit Resend unless `vercel dev` is used with secrets).
+- [ ] Optional: add Cloudflare Turnstile (free, invisible) for stronger spam protection beyond the honeypot.
 
 ---
 
@@ -71,29 +65,42 @@ Live URL: `https://wa.me/5491154697343?text=...` (Romina's AR mobile +54 9 11 54
 
 ---
 
-## Stack & commands
+## Stack
 
-- **Astro** static output, no framework integrations.
-- **Tailwind via CDN/utility classes** inside Astro components (verify in `astro.config.mjs`/`package.json` if extending).
-- No GSAP yet — entrance reveals are CSS-only (`animation-timeline: view()` / IntersectionObserver for counters).
+- **Astro 6** with `@astrojs/vercel` adapter → static pages + serverless API routes on Vercel.
+- **Tailwind CSS 4** via `@tailwindcss/vite`.
+- **`@astrojs/sitemap`** → `sitemap-index.xml` generated at build.
+- **Fonts self-hosted** via `@fontsource/playfair-display` + `@fontsource/lora` (latin-only, specific weights) — no Google Fonts CDN.
+- **Images** in `src/assets/` served through Astro's `<Image />` component (responsive `srcset`, on-the-fly compression; hero ~512kB → ~40kB at display sizes).
+- **No GSAP** — all entrance reveals are CSS / IntersectionObserver.
+
+### Commands
 
 ```bash
 npm run dev      # localhost:4321
-npm run build    # → ./dist (static)
+npm run build    # → ./dist (static) + .vercel/output (Vercel build output)
 npm run preview
 ```
 
 ## Hosting / deploy
 
-- **Not yet decided.** Repo is at `github.com/kirigaya97/gaudiano-site`. `master` is the deploy branch by convention.
-- No `deploy.sh`, no CI/CD wired in this project (contrast with `~/web/arilart/`).
-- When hosting is chosen (Vercel / Netlify / Cloudflare Pages / Hostinger static): document the target here and whether a serverless function is available (relevant for the mailing provider decision above).
+- **Hosting:** Vercel (decided 2026-04-24).
+- Repo: `github.com/kirigaya97/gaudiano-site`, branch `master` = deploy branch.
+- First deploy steps:
+  1. Import the GitHub repo in Vercel.
+  2. Set the three env vars above (Production + Preview).
+  3. Add custom domain; update `SITE` in `astro.config.mjs` to match, and the `Sitemap:` line in `public/robots.txt`.
+  4. Verify sending domain in Resend.
 
 ---
 
 ## Open TODOs (summary)
 
-- [ ] Decide mailing provider and wire `<form action>` + server-side honeypot check.
-- [ ] Pick hosting target; add deploy workflow.
-- [ ] Add `favicon` / social-share meta (`og:image`, `twitter:card`) before launch.
-- [ ] Optional: rename the top-of-file comment block in `index.astro` (still references "Option 6 — Fusion + Customer Modifications" and compares to options 3/4/5).
+- [ ] **Domain.** Pick it (rominagaudiano.com?), configure in Vercel, update `astro.config.mjs` `SITE` and `robots.txt`.
+- [ ] **Resend setup.** Domain verification + API key + Vercel env vars (see Contact form section).
+- [ ] **OG image.** Add `public/og-image.jpg` (1200×630) so unfurls look premium; BaseLayout references `/og-image.jpg` by default.
+- [ ] **Apple touch icon.** Add `public/apple-touch-icon.png` (180×180) — layout references `/apple-touch-icon.png`.
+- [ ] **A11y pass.** Keyboard-focus visibility (the page uses `cursor: none` globally — verify focus rings survive), form tab order, contrast on cashmere-over-cream strips.
+- [ ] **Legal footer.** Once the form captures PII, add a minimal privacy note + `/privacidad` page (Argentina Ley 25.326).
+- [ ] **Analytics decision.** Plausible / Vercel Analytics / none.
+- [ ] **Stale top-of-page comment in `index.astro`** is already cleaned — leave as reference.

@@ -3,6 +3,12 @@
 // Palette: alabaster / navy (#1B263B) / cashmere (#D7C9B4)
 // Typography: Playfair Display + Lora (self-hosted via @fontsource, see BaseLayout)
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import gaudiano1 from "../assets/gaudiano1.webp";
+import gaudiano2 from "../assets/gaudiano2.webp";
+import impactoTrading from "../assets/impacto-trading.webp";
+import traderAnalysis from "../assets/trader-analysis.webp";
+import tradingGraphsBg from "../assets/trading_graphs_bg.webp";
 ---
 
 <BaseLayout
@@ -389,9 +395,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         ═══════════════════════════════════════════════════════════
       -->
       <div class="relative hidden md:block o6-hero-img overflow-hidden">
-        <img src="/gaudiano1.webp" alt="Romina Gaudiano"
-             class="absolute inset-0 w-full h-full object-cover object-top"
-             style="filter: grayscale(25%) contrast(1.05);" />
+        <Image src={gaudiano1} alt="Romina Gaudiano"
+               widths={[640, 1024, 1600]}
+               sizes="50vw"
+               loading="eager"
+               fetchpriority="high"
+               class="absolute inset-0 w-full h-full object-cover object-top"
+               style="filter: grayscale(25%) contrast(1.05);" />
         <!-- Gradient: covers the right edge of the image to blend into the text column -->
         <div class="absolute inset-0"
              style="background: linear-gradient(to right, transparent, var(--navy));"></div>
@@ -421,9 +431,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           - Same grayscale/contrast filter as the desktop version for visual consistency
           Note: alt="" intentional — this is decorative/duplicate, screen readers use the desktop version
         -->
-        <img src="/gaudiano1.webp" alt=""
-             class="absolute inset-0 w-full h-full object-cover object-top"
-             style="filter: grayscale(25%) contrast(1.05); transform: scaleX(-1);" />
+        <Image src={gaudiano1} alt=""
+               widths={[480, 768, 1024]}
+               sizes="100vw"
+               loading="eager"
+               fetchpriority="high"
+               class="absolute inset-0 w-full h-full object-cover object-top"
+               style="filter: grayscale(25%) contrast(1.05); transform: scaleX(-1);" />
 
         <!--
           Left gradient overlay:
@@ -498,20 +512,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
             <!-- Top slice -->
             <div class="w-full flex-1 relative overflow-hidden group cursor-default">
-              <img src="/impacto-trading.webp" alt="Mentalidad en el trading — superior"
-                   class="w-full object-cover object-[center_top] h-[300%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
+              <Image src={impactoTrading} alt="Mentalidad en el trading — superior"
+                     widths={[320, 640, 1024]}
+                     sizes="(min-width: 768px) 25vw, 33vw"
+                     class="w-full object-cover object-[center_top] h-[300%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
             </div>
 
             <!-- Middle slice -->
             <div class="w-full flex-1 relative overflow-hidden group cursor-default">
-              <img src="/impacto-trading.webp" alt="Mentalidad en el trading — central"
-                   class="w-full object-cover object-[center_center] h-[300%] -translate-y-[33%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
+              <Image src={impactoTrading} alt="Mentalidad en el trading — central"
+                     widths={[320, 640, 1024]}
+                     sizes="(min-width: 768px) 25vw, 33vw"
+                     class="w-full object-cover object-[center_center] h-[300%] -translate-y-[33%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
             </div>
 
             <!-- Bottom slice -->
             <div class="w-full flex-1 relative overflow-hidden group cursor-default">
-              <img src="/impacto-trading.webp" alt="Mentalidad en el trading — inferior"
-                   class="w-full object-cover object-[center_bottom] h-[300%] -translate-y-[66%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
+              <Image src={impactoTrading} alt="Mentalidad en el trading — inferior"
+                     widths={[320, 640, 1024]}
+                     sizes="(min-width: 768px) 25vw, 33vw"
+                     class="w-full object-cover object-[center_bottom] h-[300%] -translate-y-[66%] transition-all duration-1000 group-hover:scale-[1.03] group-hover:grayscale" />
             </div>
 
           </div>
@@ -574,8 +594,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <div class="relative group mx-2 md:mx-0">
             <div class="overflow-hidden aspect-[4/5] relative"
                  style="border-radius: 2%; box-shadow: 0 12px 40px rgba(0,0,0,0.35);">
-              <img src="/trader-analysis.webp" alt="Análisis de trading profesional"
-                   class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+              <Image src={traderAnalysis} alt="Análisis de trading profesional"
+                     widths={[480, 768, 1024]}
+                     sizes="(min-width: 768px) 40vw, 100vw"
+                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
             </div>
           </div>
         </div>
@@ -808,8 +830,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="o6-sobre-right flex justify-center md:justify-end">
           <div class="group relative w-full max-w-sm md:max-w-md aspect-[4/5] overflow-hidden"
                style="border-radius: 2%; box-shadow: 0 14px 42px rgba(27,38,59,0.22);">
-            <img src="/gaudiano2.webp" alt="Romina Gaudiano"
-                 class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-105" />
+            <Image src={gaudiano2} alt="Romina Gaudiano"
+                   widths={[480, 768, 1024]}
+                   sizes="(min-width: 768px) 40vw, 100vw"
+                   class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-105" />
           </div>
         </div>
 
@@ -853,7 +877,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section id="contacto" class="relative py-24 md:py-48 px-6 md:px-20 text-center overflow-hidden">
       <!-- Background Image with Overlay (Directly related to traders) -->
       <div class="absolute inset-0 z-0 scale-[1.05]">
-        <img src="/trading_graphs_bg.webp" alt="" class="w-full h-full object-cover blur-[2px]" />
+        <Image src={tradingGraphsBg} alt=""
+               widths={[768, 1280, 1920]}
+               sizes="100vw"
+               class="w-full h-full object-cover blur-[2px]" />
         <div class="absolute inset-0 bg-[#2A2A2A]/80 backdrop-blur-[2px]"></div>
       </div>
 
@@ -875,13 +902,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
 
         <!--
-          Contact form — mailing provider pending.
-          TODO: wire `action` to final endpoint (e.g. Formspree / Resend / custom SMTP route).
-          Until then, the form is intercepted client-side and shows a confirmation state.
-          Honeypot field `website` must remain empty — bots fill it, we silently reject.
+          Contact form — posts JSON to /api/contact (Vercel serverless, Resend).
+          Honeypot field `website` must remain empty; also re-checked server-side.
         -->
         <form id="o6-contact-form"
-              action=""
+              action="/api/contact"
               method="POST"
               novalidate
               class="o6-form max-w-xl mx-auto text-left grid gap-5">
@@ -1022,11 +1047,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }, { threshold: 0.6 });
     counters.forEach(c => counterObserver.observe(c));
 
-    // ── Contact form submit (placeholder until mailing provider is wired) ──
+    // ── Contact form submit → POST /api/contact ──
     const contactForm = document.getElementById('o6-contact-form') as HTMLFormElement | null;
     const formStatus  = document.getElementById('o6-form-status')  as HTMLElement    | null;
     if (contactForm && formStatus) {
-      contactForm.addEventListener('submit', (e) => {
+      contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Honeypot: bots fill hidden `website` field — silently "succeed" and drop.
@@ -1042,11 +1067,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           return;
         }
 
-        // TODO: POST to mailing provider once decided (Formspree / Resend / custom).
         const submitBtn = contactForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
         if (submitBtn) submitBtn.disabled = true;
-        formStatus.textContent = 'Gracias, te escribo pronto.';
-        contactForm.reset();
+        formStatus.textContent = 'Enviando...';
+
+        const data = Object.fromEntries(new FormData(contactForm).entries());
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          if (!res.ok) {
+            const { error } = await res.json().catch(() => ({ error: null }));
+            throw new Error(error ?? 'Error enviando el formulario.');
+          }
+          formStatus.textContent = 'Gracias, te escribo pronto.';
+          contactForm.reset();
+        } catch (err) {
+          formStatus.textContent = err instanceof Error ? err.message : 'No pudimos enviar tu consulta.';
+          if (submitBtn) submitBtn.disabled = false;
+        }
       });
     }
   </script>
