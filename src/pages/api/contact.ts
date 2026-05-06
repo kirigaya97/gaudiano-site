@@ -1,3 +1,10 @@
+// ⚠️ INACTIVE — kept as a fallback in case we migrate off Web3Forms back to Resend.
+// The landing form posts directly to https://api.web3forms.com/submit (see src/pages/index.astro).
+// This endpoint is no longer hit by the UI, but is preserved (deployed and reachable) so we can
+// re-point the form here without a redeploy if needed. Reactivation requires:
+//   1. Verified sender domain in Resend (blocked today by DNS in Wix — see ../../../dns.txt).
+//   2. RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL set in Vercel.
+//   3. Revert form action + JS in src/pages/index.astro to /api/contact.
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
 

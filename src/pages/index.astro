@@ -902,15 +902,24 @@ import tradingGraphsBg from "../assets/trading_graphs_bg.webp";
         </p>
 
         <!--
-          Contact form — posts JSON to /api/contact (Vercel serverless, Resend).
-          Honeypot field `website` must remain empty; also re-checked server-side.
+          Contact form — posts JSON directly to Web3Forms (https://api.web3forms.com/submit).
+          The access_key is signed up under Romina's Gmail → leads land in that inbox.
+          Per Web3Forms docs the access_key is safe to expose publicly.
+          The legacy `/api/contact.ts` (Resend) is preserved as an inactive fallback.
         -->
         <form id="o6-contact-form"
-              action="/api/contact"
+              action="https://api.web3forms.com/submit"
               method="POST"
               novalidate
               class="o6-form max-w-xl mx-auto text-left grid gap-5">
-          <!-- Honeypot (hidden from humans, visible to bots) -->
+          <!-- Web3Forms required + recommended hidden fields -->
+          <input type="hidden" name="access_key" value="ec6f5c19-fc4b-4287-b6cb-66bd742a44e2" />
+          <input type="hidden" name="subject" value="Nueva consulta — rominagaudiano.com" />
+          <input type="hidden" name="from_name" value="rominagaudiano.com" />
+          <!-- Web3Forms native honeypot -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display: none;" />
+
+          <!-- Custom honeypot (kept from previous Resend setup, double layer) -->
           <div class="o6-hp" aria-hidden="true">
             <label for="o6-hp-website">No completar este campo</label>
             <input id="o6-hp-website" type="text" name="website" tabindex="-1" autocomplete="off" />
@@ -1047,14 +1056,14 @@ import tradingGraphsBg from "../assets/trading_graphs_bg.webp";
     }, { threshold: 0.6 });
     counters.forEach(c => counterObserver.observe(c));
 
-    // ── Contact form submit → POST /api/contact ──
+    // ── Contact form submit → POST https://api.web3forms.com/submit ──
     const contactForm = document.getElementById('o6-contact-form') as HTMLFormElement | null;
     const formStatus  = document.getElementById('o6-form-status')  as HTMLElement    | null;
     if (contactForm && formStatus) {
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Honeypot: bots fill hidden `website` field — silently "succeed" and drop.
+        // Custom honeypot: bots fill hidden `website` field — silently "succeed" and drop.
         const hp = contactForm.querySelector('input[name="website"]') as HTMLInputElement | null;
         if (hp && hp.value.trim() !== '') {
           formStatus.textContent = 'Gracias, te escribo pronto.';
@@ -1073,14 +1082,14 @@ import tradingGraphsBg from "../assets/trading_graphs_bg.webp";
 
         const data = Object.fromEntries(new FormData(contactForm).entries());
         try {
-          const res = await fetch('/api/contact', {
+          const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(data),
           });
-          if (!res.ok) {
-            const { error } = await res.json().catch(() => ({ error: null }));
-            throw new Error(error ?? 'Error enviando el formulario.');
+          const result = await res.json().catch(() => ({}));
+          if (!res.ok || result.success === false) {
+            throw new Error(result.message ?? 'Error enviando el formulario.');
           }
           formStatus.textContent = 'Gracias, te escribo pronto.';
           contactForm.reset();

@@ -2,7 +2,7 @@
 
 Living snapshot of the project. Update this file whenever a significant decision, integration, or TODO changes. See `CLAUDE.md` for brand/aesthetic context and workflow.
 
-**Last updated:** 2026-04-24
+**Last updated:** 2026-05-06
 
 ---
 
@@ -16,40 +16,45 @@ Living snapshot of the project. Update this file whenever a significant decision
 | Route | File | Status |
 |---|---|---|
 | `/` | `src/pages/index.astro` | Landing |
-| `POST /api/contact` | `src/pages/api/contact.ts` | Serverless endpoint (Resend) |
+| `POST /api/contact` | `src/pages/api/contact.ts` | ⚠️ Inactive — Resend fallback (see below) |
 
 ---
 
 ## Contact form
 
-Posts JSON to `POST /api/contact` (Vercel serverless function) which validates input, re-checks the honeypot server-side, and sends via Resend.
+Posts JSON directly from the browser to `https://api.web3forms.com/submit` (Web3Forms). No server-side endpoint is involved in the active flow.
+
+**Why not Resend?** Resend requires a verified sender domain, which requires an MX record on a subdomain (e.g. `send.rominagaudiano.com`). Wix does not allow custom MX records on subdomains, and the domain DNS is currently locked to Wix (see `../dns.txt`). Web3Forms needs zero DNS config, so it works while DNS migration is pending.
+
+### Active integration — Web3Forms
+
+- **Endpoint:** `POST https://api.web3forms.com/submit` (form-as-a-service, no serverless function).
+- **Access key:** `ec6f5c19-fc4b-4287-b6cb-66bd742a44e2` — inlined as a hidden input. Per Web3Forms docs the key is safe to be public; it cannot be used to read submissions, only to send them to the registered inbox.
+- **Inbox:** the Gmail used to register at web3forms.com (Romina's). Free tier = 250 submissions/month, single-recipient. Multi-recipient requires PRO.
+- **Spam protection:** double honeypot — Web3Forms native `botcheck` (hidden checkbox) + the existing custom `website` text field (re-checked client-side before submitting).
 
 ### Fields
 
 | Name | Type | Required | Notes |
 |---|---|---|---|
-| `name`    | text      | yes | `autocomplete="name"` |
-| `email`   | email     | yes | `autocomplete="email"` |
-| `phone`   | tel       | yes (client) / optional (server) | `autocomplete="tel"` |
-| `message` | textarea  | yes | 4 rows, vertically resizable |
-| `website` | text (honeypot) | no | Hidden off-screen; filled → server returns `{ ok: true }` without sending |
+| `name`     | text       | yes | `autocomplete="name"` |
+| `email`    | email      | yes | `autocomplete="email"` |
+| `phone`    | tel        | yes | `autocomplete="tel"` |
+| `message`  | textarea   | yes | 4 rows, vertically resizable |
+| `subject`  | hidden     | — | `"Nueva consulta — rominagaudiano.com"` |
+| `from_name`| hidden     | — | `"rominagaudiano.com"` (sender label in the email) |
+| `botcheck` | checkbox (hidden) | — | Web3Forms native honeypot |
+| `website`  | text (custom honeypot) | — | Filled → JS short-circuits with fake "success" |
 
-### Required env vars (Vercel → Settings → Environment Variables)
+### Inactive fallback — `src/pages/api/contact.ts` (Resend)
 
-See `.env.example`. All three must be set for the endpoint to succeed:
+The Resend endpoint is preserved (still deployed, still importable) so we can swap back without rewriting if/when the DNS migration unblocks Resend. Reactivation = (1) verify the sender domain in Resend, (2) set `RESEND_API_KEY` / `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` in Vercel, (3) revert the form `action` and the `fetch()` URL in `src/pages/index.astro` to `/api/contact`.
 
-- `RESEND_API_KEY` — Resend API key.
-- `CONTACT_TO_EMAIL` — inbox that receives consultas (e.g. `romina@rominagaudiano.com`).
-- `CONTACT_FROM_EMAIL` — verified sender (requires a domain verified in Resend).
+### TODOs for the form
 
-If any is missing, the endpoint returns `500` with `"Servicio de correo no configurado."`.
-
-### Pre-launch TODOs for the form
-
-- [ ] Sign up for Resend and verify the sending domain.
-- [ ] Set `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` in Vercel.
-- [ ] Test end-to-end from a deployed preview URL (local dev can't hit Resend unless `vercel dev` is used with secrets).
-- [ ] Optional: add Cloudflare Turnstile (free, invisible) for stronger spam protection beyond the honeypot.
+- [ ] Submit a real test from the deployed preview and confirm the email lands in Romina's Gmail (check spam folder on first send).
+- [ ] Decide long-term: stay on Web3Forms (250/mo cap, single-recipient) or migrate to Resend after DNS leaves Wix.
+- [ ] Optional: add Cloudflare Turnstile or hCaptcha if the honeypots ever stop being enough.
 
 ---
 
