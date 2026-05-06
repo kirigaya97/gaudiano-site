@@ -24,6 +24,8 @@ import "@fontsource/playfair-display/latin-700.css";
 import "@fontsource/lora/latin-400.css";
 import "@fontsource/lora/latin-400-italic.css";
 import "@fontsource/lora/latin-500.css";
+
+import Analytics from "@vercel/analytics/astro";
 ---
 
 <!doctype html>
@@ -54,6 +56,8 @@ import "@fontsource/lora/latin-500.css";
     <meta name="twitter:image" content={ogImageURL} />
 
     <meta name="theme-color" content="#1B263B" />
+
+    <Analytics />
   </head>
   <body>
     <slot />
